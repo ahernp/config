@@ -1,0 +1,12 @@
+[user]
+	name = Paul Ahern
+	email = ahernp@ahernp.com
+[merge]
+	tool = vimdiff
+[core]
+	editor = vi
+[alias]
+	ci = commit
+	st = status
+[color]
+	ui = auto

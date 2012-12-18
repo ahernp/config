@@ -1,0 +1,16 @@
+.project
+.pydevproject
+.ropeproject
+*.pyc
+*.sqlite
+*.sqlite-journal
+*.conflict
+*.swp
+*.aux
+*.log
+*.dvi
+*.out
+.coverage
+*.Rout
+*.RData
+*.pdf
