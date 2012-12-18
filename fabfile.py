@@ -1,10 +1,12 @@
 """
 Simple Backup.
 """
+import os
 from datetime import datetime
 from fabric.api import task, hosts, local, env, settings
 from fabric.colors import magenta
 from fabric.context_managers import lcd
+from fabric.contrib.files import exists
 from decorator import decorator
 
 env.hosts = ['web']
@@ -52,8 +54,11 @@ def backup():
         local('cp -u ~/t.txt ~/Desktop/work/t.txt')
         with settings(warn_only=True):
             local('rm .goutputstream*')
-    rsync('~/Documents', '/media/truecrypt1/documents')
-    rsync('~/Desktop/work', '/media/truecrypt1/work')
+    if os.path.exists('/media/ahernp/8B88-583A/work'):
+        rsync('~/Desktop/work', '/media/ahernp/8B88-583A/work')
+    else:
+        rsync('~/Documents', '/media/truecrypt1/documents')
+        rsync('~/Desktop/work', '/media/truecrypt1/work')
 
 
 @task
