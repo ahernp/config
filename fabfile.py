@@ -6,7 +6,6 @@ from datetime import datetime
 from fabric.api import task, hosts, local, env, settings
 from fabric.colors import magenta
 from fabric.context_managers import lcd
-from fabric.contrib.files import exists
 from decorator import decorator
 
 env.hosts = ['web']
@@ -49,9 +48,8 @@ def backup():
     with lcd('/home/ahernp/'):
         for config_file in CONFIG_FILES:
             filename = config_file.split('/')[-1]
-            local('cp -u %s ~/Desktop/work/doc/%s' % (config_file, filename))
+            local('cp -u %s ~/Desktop/work/config/%s' % (config_file, filename))
             local('cp -u %s ~/code/config/%s' % (config_file, filename))
-        local('cp -u ~/t.txt ~/Desktop/work/t.txt')
         with settings(warn_only=True):
             local('rm .goutputstream*')
     if os.path.exists('/media/ahernp/8B88-583A/work'):

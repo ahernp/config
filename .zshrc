@@ -44,5 +44,7 @@ setopt HIST_FIND_NO_DUPS
 stty -ixon
 
 # Keybindings
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
+bindkey "^[[1~"  beginning-of-line
+bindkey "^[[4~"  end-of-line
+bindkey "^[[3~"  delete-char
+bindkey "^[3;5~" delete-char
