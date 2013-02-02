@@ -218,3 +218,6 @@ nmap <up>       :bp<CR>
 nmap <down>     :bn<CR>
 nmap <left>     :tabp<CR>
 nmap <right>    :tabn<CR>
+
+" Use backspace to clear highlighting
+nmap <backspace> :noh<CR>
