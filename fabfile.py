@@ -44,7 +44,7 @@ def rsync(source, dest):
 def backup():
     """Simple backup of local directories to USB drive."""
     CONFIG_FILES = ['~/.zshrc', '~/.vimrc', '/etc/hosts', '~/fabfile.py',
-                    '~/.gitconfig', '~/code/dmcm/project/.gitignore']
+                    '~/.gitconfig']
     with lcd('/home/ahernp/'):
         for config_file in CONFIG_FILES:
             filename = config_file.split('/')[-1]
@@ -69,12 +69,13 @@ def full_backup():
         dest = '/media/ahernp/Iomega HDD/archive/%s' % (directory)
         print('# Backing up newer versions of files in %s to %s' % (source, dest))
         local('rsync -auv --stats --modify-window=1 --delete "%s" "%s"' % (source, dest))
+
     backup('Desktop/work')
     backup('Documents')
     #backup('dos')
-    backup('ebooks')
-    backup('Music')
-    backup('Pictures')
-    backup('Spoken')
+    #backup('ebooks')
+    #backup('Music')
+    #backup('Pictures')
+    #backup('Spoken')
     #backup('Videos')
     local('cp -u ~/archive.tar.bz2 /media/ahernp/Iomega\ HDD/archive.tar.bz2')
