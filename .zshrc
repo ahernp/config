@@ -23,7 +23,10 @@ export WORKON_HOME=~/code
 source /usr/local/bin/virtualenvwrapper.sh
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--system-site-packages'
 
-dmcm() {export PROJECTPATH=~/code/dmcm;workon dmcm;cd $PROJECTPATH/project}
+# Show function names
+echo "User-defined zsh functions"
+grep "() {" ~/.zshrc
+dmcm() {workon dmcm;cd ~/code/dmcm/project}
 
 # zsh history
 HISTFILE=~/.zsh_history
