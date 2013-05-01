@@ -20,7 +20,8 @@ alias vi='vi -p'
 
 # Virtual environments
 export WORKON_HOME=~/code
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
+source /etc/bash_completion.d/virtualenvwrapper
 
 # Show function names
 echo "User-defined zsh functions"
