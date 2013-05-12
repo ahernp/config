@@ -6,7 +6,12 @@
 [core]
 	editor = vi
 [alias]
-	ci = commit
-	st = status
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [color]
 	ui = auto
+[push]
+	default = matching
