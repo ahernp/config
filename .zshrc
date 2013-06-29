@@ -1,12 +1,12 @@
 # Load and run compinit
-autoload -U compinit
+autoload -U compinit zcalc zmv
 compinit -i
 
 # Prompts
 setopt prompt_subst
 autoload -U colors && colors
 RPROMPT='${PWD/#$HOME/~} (%n@%m)'
-# vcprompt must be installed for this to work (http://vc.gerg.ca/hg/vcprompt/)
+# vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
 PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}$(vcprompt)%{$reset_color%}'
 
 export EDITOR="vi"

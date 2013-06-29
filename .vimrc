@@ -5,14 +5,6 @@
 autocmd! bufwritepost .vimrc source %
 
 
-" Better copy & paste
-" When you want to paste large blocks of code into vim, press F2 before you
-" paste. At the bottom you should see ``-- INSERT (paste) --``.
-
-set pastetoggle=<F2>
-set clipboard=unnamed
-
-
 " Mouse and backspace
 "" set mouse=a  " on OSX press ALT and click
 set bs=2     " make backspace behave like normal again
@@ -22,14 +14,6 @@ set bs=2     " make backspace behave like normal again
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
-
-
-" Bind nohl
-" Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
@@ -216,3 +200,7 @@ nmap <right>    :tabn<CR>
 
 " Use backspace to clear highlighting
 nmap <backspace> :noh<CR>
+
+" Highlight cursor
+set cursorline
+set cursorcolumn
