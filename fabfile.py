@@ -79,4 +79,4 @@ def full_backup():
     backup('Pictures')
     backup('Spoken')
     #backup('Videos')
-    #local('cp -u ~/archive.tar.bz2 /media/ahernp/Iomega\ HDD/archive.tar.bz2')
+    local('cp -u ~/archive.tar.bz2 /media/ahernp/Iomega\ HDD/archive.tar.bz2')

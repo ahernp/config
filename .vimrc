@@ -35,11 +35,6 @@ noremap <Leader>E :qa!<CR>   " Quit all windows
 "" map <c-h> <c-w>h
 
 
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-
-
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
@@ -139,58 +134,19 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 
-" Settings for python-mode
-" cd ~/.vim/bundle
-" git clone https://github.com/klen/python-mode
-map <Leader>g :call RopeGotoDefinition()<CR>
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
-let g:pymode_breakpoint = 0
-let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
 set foldlevel=99
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
-" To setup Rope for a project:
-" 1. Run :RopeOpenProject 
-" 2. Edit .ropeproject/confg.py and add any extra libraries to 
-" the pythonpath (prefs.add('python_path',...))
-
-" Folding maps:
-" zo: Open Fold (zO to open all folds at the cursor)
-" zc: Close fold (zC to close all at the cursor)
-" za: Toggle fold (zA)
-" zv: Unfold to make cursor line visible.
-" zM: Close all folds.
-" zR: Open all folds.
-
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-"" inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-"" inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
+map <Leader>b Oimport pdb; pdb.set_trace() # BREAKPOINT<C-c>
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
-autocmd BufReadPost *
-  \  if line("'\"") > 0 && line("'\"") <= line("$") |
-  \       exe "normal g`\"" |
-  \   endif
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+"autocmd BufReadPost *
+"  \  if line("'\"") > 0 && line("'\"") <= line("$") |
+"  \       exe "normal g'\"" |
+"  \   endif
 
 " Use arrow to navigate between tabs and buffers
 nmap <up>       :bp<CR>
