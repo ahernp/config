@@ -160,3 +160,6 @@ nmap <backspace> :noh<CR>
 " Highlight cursor
 set cursorline
 set cursorcolumn
+
+" Disable rope
+let g:pymode_rope = 0

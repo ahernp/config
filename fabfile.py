@@ -80,3 +80,16 @@ def full_backup():
     backup('Spoken')
     #backup('Videos')
     local('cp -u ~/archive.tar.bz2 /media/ahernp/Iomega\ HDD/archive.tar.bz2')
+
+
+@task
+@hosts('localhost')
+def check_git_status():
+    """Check status of all local repositories."""
+    REPOSITORIES = ['django-bugtracker', 'django-monitoring',
+                    'config', 'django-ahernp',
+                    'django-dmcm', 'django-feedreader']
+    for repository in REPOSITORIES:
+        with lcd('/home/ahernp/code/%s' % (repository)):
+            local('pwd')
+            local('git st')

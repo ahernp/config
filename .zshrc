@@ -15,6 +15,7 @@ alias glog='hg glog -l9 --style compact'
 alias test='fab test'
 alias run='fab runserver'
 alias backup='cd ~;fab backup;cd -'
+alias cc='cd ~;fab check_git_status;cd -'
 alias ack='ack-grep'
 alias vi='vi -p'
 
