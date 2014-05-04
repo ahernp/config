@@ -50,9 +50,9 @@ def backup():
             filename = config_file.split('/')[-1]
             local('cp -u %s ~/Desktop/work/config/%s' % (config_file, filename))
             local('cp -u %s ~/code/config/%s' % (config_file, filename))
-        with settings(warn_only=True):
-            local('rm .goutputstream*')
-            local('rm .Xauthority*')
+#        with settings(warn_only=True):
+#            local('rm .goutputstream*')
+#            local('rm .Xauthority*')
     if os.path.exists('/media/ahernp/8B88-583A/work'):
         rsync('~/Desktop/work', '/media/ahernp/8B88-583A/work')
     else:
@@ -92,4 +92,4 @@ def check_git_status():
     for repository in REPOSITORIES:
         with lcd('/home/ahernp/code/%s' % (repository)):
             local('pwd')
-            local('git st')
+            local('git status')

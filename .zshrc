@@ -7,7 +7,7 @@ setopt prompt_subst
 autoload -U colors && colors
 RPROMPT='${PWD/#$HOME/~} (%n@%m)'
 # vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
-PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%}$(vcprompt)%{$reset_color%} '
+PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt)%{$reset_color%} '
 
 export EDITOR="vi"
 alias ls='ls -Fh --color=auto'
@@ -20,10 +20,10 @@ alias ack='ack-grep'
 alias vi='vi -p'
 
 # Virtual environments
-source /etc/bash_completion.d/virtualenvwrapper
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # Show function names
-echo "User-defined zsh functions"
+echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
 alias ap='workon ahernp;cd ~/code/django-ahernp/ahernp'
 
