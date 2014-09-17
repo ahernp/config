@@ -50,10 +50,10 @@ def backup():
             filename = config_file.split('/')[-1]
             local('cp -u %s ~/Desktop/work/config/%s' % (config_file, filename))
             local('cp -u %s ~/code/config/%s' % (config_file, filename))
-#        with settings(warn_only=True):
-#            local('rm .goutputstream*')
-#            local('rm .Xauthority*')
-    if os.path.exists('/media/ahernp/8B88-583A/work'):
+    if os.path.exists('/media/ahernp/SANDISK/work'):
+        rsync('~/Documents', '/media/ahernp/SANDISK/Documents')
+        rsync('~/Desktop/work', '/media/ahernp/SANDISK/work')
+    elif os.path.exists('/media/ahernp/8B88-583A/work'):
         rsync('~/Desktop/work', '/media/ahernp/8B88-583A/work')
     else:
         rsync('~/Documents', '/media/truecrypt1/documents')

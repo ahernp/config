@@ -163,3 +163,7 @@ set cursorcolumn
 
 " Disable rope
 let g:pymode_rope = 0
+
+" Paste from clipboard.
+map <Leader>p :set paste<CR>o<ESC>]p:set nopaste<cr>
+
