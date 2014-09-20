@@ -44,7 +44,7 @@ def rsync(source, dest):
 def backup():
     """Simple backup of local directories to USB drive."""
     CONFIG_FILES = ['~/.zshrc', '~/.vimrc', '/etc/hosts', '~/fabfile.py',
-                    '~/.gitconfig']
+                    '~/.gitconfig', '~/.psqlrc']
     with lcd('/home/ahernp/'):
         for config_file in CONFIG_FILES:
             filename = config_file.split('/')[-1]

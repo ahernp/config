@@ -26,6 +26,8 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
 alias ap='workon ahernp;cd ~/code/django-ahernp/ahernp'
+alias dev='workon dev;cd ~/code/dev'
+alias demo='workon demo;cd ~/code/demo'
 
 # zsh history
 HISTFILE=~/.zsh_history
