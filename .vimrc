@@ -9,11 +9,9 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ervandew/supertab'
 Plugin 'altercation/vim-colors-solarized'
 
-filetype on
+filetype plugin indent on
 
 " Settings for vim-powerline
 set laststatus=2
@@ -27,17 +25,10 @@ set wildignore+=*/coverage/*
 
 " Settings for ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
 
-" Settings for YouCompleteMe
-let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
-
-" SEttings for SuperTab
-let g:SuperTabDefaultCompletionType = '<C-Tab>'
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
