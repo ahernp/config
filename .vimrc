@@ -5,11 +5,13 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'Lokaltog/vim-powerline.git'
-Bundle 'kien/ctrlp.vim.git'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
+Plugin 'altercation/vim-colors-solarized'
 
 filetype on
 
@@ -17,17 +19,25 @@ filetype on
 set laststatus=2
 
 " Settings for ctrlp
-let g:ctrlp_max_height = 30
+let g:ctrlp_max_height=30
+let g:ctrlp_follow_symlinks=1
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 " Settings for ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
+let g:UltiSnipsListSnippets="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="horizontal"
+
+" Settings for YouCompleteMe
+let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-S-TAB>', '<Up>']
+
+" SEttings for SuperTab
+let g:SuperTabDefaultCompletionType = '<C-Tab>'
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -48,8 +58,11 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim https://raw.githubusercontent.com/ahernp/config/master/wombat256mod.vim
-set t_Co=256
-color wombat256mod
+"set t_Co=256
+"color wombat256mod
+syntax enable
+set background=dark
+colorscheme solarized
 
 " Enable syntax highlighting
 filetype off
@@ -97,8 +110,8 @@ nmap <right>    :tabn<CR>
 nmap <backspace> :noh<CR>
 
 " Highlight cursor
-set cursorline
-set cursorcolumn
+"set cursorline
+"set cursorcolumn
 
 " Paste from clipboard.
 map <Leader>p :set paste<CR>o<ESC>]p:set nopaste<cr>
