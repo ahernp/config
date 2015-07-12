@@ -50,10 +50,10 @@ def backup():
             filename = config_file.split('/')[-1]
             local('cp -u %s ~/Desktop/work/config/%s' % (config_file, filename))
             local('cp -u %s ~/code/config/%s' % (config_file, filename))
-    for disk in ['SANDISK', '8B88-583A']:
+    for disk in ['SANDISK', '8B88-583A', 'HP v165w']:
         if os.path.exists('/media/ahernp/%s/work' % disk):
-            rsync('~/Documents', '/media/ahernp/%s/Documents' % disk)
-            rsync('~/Desktop/work', '/media/ahernp/%s/work' % disk)
+            rsync('~/Documents', '"/media/ahernp/%s/Documents"' % disk)
+            rsync('~/Desktop/work', '"/media/ahernp/%s/work"' % disk)
 
 
 @task
