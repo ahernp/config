@@ -2,14 +2,14 @@
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 
@@ -49,11 +49,11 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim https://raw.githubusercontent.com/ahernp/config/master/wombat256mod.vim
-"set t_Co=256
-"color wombat256mod
+set t_Co=256
+color wombat256mod
 syntax enable
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 
 " Enable syntax highlighting
 filetype off
@@ -107,3 +107,6 @@ nmap <backspace> :noh<CR>
 " Paste from clipboard.
 map <Leader>p :set paste<CR>o<ESC>]p:set nopaste<cr>
 
+" Treat everything as UTF-8
+set encoding=utf-8
+set fileencodings=utf-8

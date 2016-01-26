@@ -28,7 +28,7 @@ grep "workon" ~/.zshrc
 alias ap='workon ahernp;cd ~/code/django-ahernp/ahernp'
 alias dev='workon dev;cd ~/code/dev'
 alias demo='workon demo;cd ~/code/demo'
-alias cel='workon celery;cd ~/code/celery'
+alias perf='workon perf;cd ~/code/perf'
 
 # zsh history
 HISTFILE=~/.zsh_history
