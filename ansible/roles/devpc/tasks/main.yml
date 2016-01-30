@@ -88,3 +88,34 @@
 - name: Set byobu backend
   command: byobu-select-backend screen
   when: not byobubackend_file.stat.exists
+
+
+- name: Install pip packages
+  pip: name={{item}}
+  with_items:
+       - fabric
+       - decorator
+       - django
+       - pypandoc
+       - glances
+  become: yes
+
+
+# vcprompt
+- name: Check link /usr/local/bin/vcprompt
+  stat: path=/usr/local/bin/vcprompt
+  register: vcprompt_link
+
+- name: Install vcprompt
+  file: src={{config_base_dir}}/roles/devpc/files/vcprompt dest=/usr/local/bin/vcprompt state=link
+  when: not vcprompt_link.stat.exists
+  become: yes
+
+- name: Check file vcprompt
+  stat: path={{config_base_dir}}/roles/devpc/files/vcprompt
+  register: vcprompt_file
+
+- name: Make vcprompt executable
+  command: chmod a+x {{config_base_dir}}/roles/devpc/files/vcprompt
+  when: not vcprompt_file.stat.xoth
+  become: yes
