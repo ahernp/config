@@ -4,44 +4,44 @@
 - name: Install apt packages
   apt: pkg={{item}} state=installed
   with_items:
-       - ack-grep
-       - byobu
-       - chromium-browser
-       - curl
-       - fabric
-       - flashplugin-installer
-       - geany
-       - git
-       - gksu
-       - gnucash
-       - htop
-       - icedtea-plugin
-       - inkscape
-       - ipython
-       - keepassx
-       - libpq-dev
-       - mercurial
-       - numlockx
-       - openjdk-7-jre
-       - pandoc
-       - postgresql
-       - postgresql-contrib
-       - python-dev
-       - python-pip
-       - python-sphinx
-       - rar
-       - speedcrunch
-       - sqlite3
-       - ssh
-       - subversion
-       - synapse
-       - synaptic
-       - tasksel
-       - traceroute
-       - tree
-       - vim
-       - virtualenvwrapper
-       - zsh
+    - ack-grep
+    - byobu
+    - chromium-browser
+    - curl
+    - fabric
+    - flashplugin-installer
+    - geany
+    - git
+    - gksu
+    - gnucash
+    - htop
+    - icedtea-plugin
+    - inkscape
+    - ipython
+    - keepassx
+    - libpq-dev
+    - mercurial
+    - numlockx
+    - openjdk-7-jre
+    - pandoc
+    - postgresql
+    - postgresql-contrib
+    - python-dev
+    - python-pip
+    - python-sphinx
+    - rar
+    - speedcrunch
+    - sqlite3
+    - ssh
+    - subversion
+    - synapse
+    - synaptic
+    - tasksel
+    - traceroute
+    - tree
+    - vim
+    - virtualenvwrapper
+    - zsh
   become: yes
 
 
@@ -90,14 +90,15 @@
   when: not byobubackend_file.stat.exists
 
 
+# Pip
 - name: Install pip packages
   pip: name={{item}}
   with_items:
-       - fabric
-       - decorator
-       - django
-       - pypandoc
-       - glances
+    - decorator
+    - django
+    - fabric
+    - glances
+    - pypandoc
   become: yes
 
 
@@ -119,3 +120,45 @@
   command: chmod a+x {{config_base_dir}}/roles/devpc/files/vcprompt
   when: not vcprompt_file.stat.xoth
   become: yes
+
+# Config files
+- name: Populate /etc/hosts
+  copy: src={{config_base_dir}}/roles/devpc/files/hosts dest=/etc/hosts mode="u=rw,g=r,o=r"
+
+- name: Check link ~/fabfile.py
+  stat: path=//home/{{userid}}/fabfile.py
+  register: fabfile_link
+
+- name: Create link ~/fabfile.py
+  file: src={{config_base_dir}}/roles/devpc/files/fabfile.py dest=/home/{{userid}}/fabfile.py state=link
+  when: not fabfile_link.stat.exists
+
+- name: Check link ~/.gitconfig
+  stat: path=//home/{{userid}}/.gitconfig
+  register: gitconfig_link
+
+- name: Create link ~/.gitconfig
+  file: src={{config_base_dir}}/roles/devpc/files/.gitconfig dest=/home/{{userid}}/.gitconfig state=link
+  when: not gitconfig_link.stat.exists
+
+# Activate zshrc
+- name: Check link ~/.zshrc
+  stat: path=//home/{{userid}}/.zshrc
+  register: zshrc_link
+
+- name: Create link ~/.zshrc
+  file: src={{config_base_dir}}/roles/devpc/files/.zshrc dest=/home/{{userid}}/.zshrc state=link
+  when: not zshrc_link.stat.exists
+
+- name: Set zsh as default shell
+  user: name={{userid}} shell=/usr/bin/zsh
+  become: yes
+
+- name: Check file ~/.zsh_history
+  stat: path=/home/{{userid}}/.zsh_history
+  register: zsh_history_file
+
+- name: Populate ~/.zsh_history
+  copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history
+  when: not zsh_history_file.stat.exists
+
