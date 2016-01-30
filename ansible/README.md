@@ -1,5 +1,5 @@
-
-# Initial Setup
+Configure Local PC
+==================
 
 1. sudo apt install ansible
 2. sudo echo "localhost" >> /etc/ansible/hosts

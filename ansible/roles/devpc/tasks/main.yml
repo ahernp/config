@@ -1,0 +1,72 @@
+---
+# Setup local PC; Tested on Ubuntu 15.10
+
+- name: Install apt packages
+  apt: pkg={{item}} state=installed
+  with_items:
+       - ack-grep
+       - byobu
+       - chromium-browser
+       - curl
+       - fabric
+       - flashplugin-installer
+       - geany
+       - git
+       - gksu
+       - gnucash
+       - htop
+       - icedtea-plugin
+       - inkscape
+       - ipython
+       - keepassx
+       - libpq-dev
+       - mercurial
+       - numlockx
+       - openjdk-7-jre
+       - pandoc
+       - postgresql
+       - postgresql-contrib
+       - python-dev
+       - python-pip
+       - python-sphinx
+       - rar
+       - speedcrunch
+       - sqlite3
+       - ssh
+       - subversion
+       - synapse
+       - synaptic
+       - tasksel
+       - traceroute
+       - tree
+       - vim
+       - virtualenvwrapper
+       - zsh
+
+
+# Setup ssh
+- name: Check link to ~/.ssh
+  stat: path=/home/{{userid}}/.ssh
+  register: ssh_link
+
+- name: Create link to ~/.ssh
+  file: src=/home/{{userid}}/Desktop/work/dot.ssh dest=/home/{{userid}}/.ssh owner={{userid}} group={{userid}} state=link
+  when: not ssh_link.stat.exists
+
+
+# Setup Vim
+- name: Check link to ~/.vim
+  stat: path=/home/{{userid}}/.vim
+  register: vim_link
+
+- name: Create link to ~/.vim
+  file: src={{config_base_dir}}/roles/devpc/files/.vim dest='/home/{{userid}}/.vim' owner={{userid}} group={{userid}} state=link
+  when: not vim_link.stat.exists
+
+- name: Check link to ~/.vimrc
+  stat: path=/home/{{userid}}/.vimrc
+  register: vimrc_link
+
+- name: Create link to ~/.vimrc
+  file: src={{config_base_dir}}/roles/devpc/files/.vimrc dest=/home/{{userid}}/.vimrc owner={{userid}} group={{userid}} state=link
+  when: not vimrc_link.stat.exists

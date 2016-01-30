@@ -1,9 +1,0 @@
----
-- name: Setup ssh
-  apt: pkg=ssh
-
-- stat: path=/home/{{userid}}/.ssh
-  register: ssh_link
-
-- file: src=/home/{{userid}}/Desktop/work/dot.ssh dest=/home/{{userid}}/.ssh owner={{userid}} group={{userid}} state=link
-  when: not ssh_link.stat.exists
