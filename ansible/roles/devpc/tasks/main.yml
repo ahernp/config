@@ -45,7 +45,7 @@
   become: yes
 
 
-# Setup ssh
+# ssh
 - name: Check link to ~/.ssh
   stat: path=/home/{{userid}}/.ssh
   register: ssh_link
@@ -55,7 +55,7 @@
   when: not ssh_link.stat.exists
 
 
-# Setup Vim
+# Vim
 - name: Check link ~/.vimrc
   stat: path=/home/{{userid}}/.vimrc
   register: vimrc_link
@@ -78,3 +78,13 @@
 - name: Vim - run bundle install
   command: vim +BundleInstall +qall
   when: not vimcolors_link.stat.exists
+
+
+# Byobu
+- name: Check file ~/.byobu/backend
+  stat: path=/home/{{userid}}/.byobu/backend
+  register: byobubackend_file
+
+- name: Set byobu backend
+  command: byobu-select-backend screen
+  when: not byobubackend_file.stat.exists
