@@ -162,3 +162,12 @@
   copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history
   when: not zsh_history_file.stat.exists
 
+
+# Install Pycharm
+- name: Add Pycharm repository
+  apt_repository: repo='ppa:mystic-mirage/pycharm'
+  become: yes
+
+- name: Install pycharm package
+  apt: pkg=pycharm state=installed
+  become: yes
