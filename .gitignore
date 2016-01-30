@@ -1,7 +1,4 @@
 .idea
-.project
-.pydevproject
-.ropeproject
 *.pyc
 *.sqlite
 *.sqlite-journal
@@ -15,3 +12,4 @@
 *.Rout
 *.RData
 *.pdf
+.netrwhist

@@ -2,7 +2,7 @@
 # Setup local PC; Tested on Ubuntu 15.10
 - hosts: localhost
   connection: local
-  become: yes
+  #become: yes
 
   roles:
     - devpc

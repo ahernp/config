@@ -42,6 +42,7 @@
        - vim
        - virtualenvwrapper
        - zsh
+  become: yes
 
 
 # Setup ssh
@@ -55,18 +56,25 @@
 
 
 # Setup Vim
-- name: Check link to ~/.vim
-  stat: path=/home/{{userid}}/.vim
-  register: vim_link
-
-- name: Create link to ~/.vim
-  file: src={{config_base_dir}}/roles/devpc/files/.vim dest='/home/{{userid}}/.vim' owner={{userid}} group={{userid}} state=link
-  when: not vim_link.stat.exists
-
-- name: Check link to ~/.vimrc
+- name: Check link ~/.vimrc
   stat: path=/home/{{userid}}/.vimrc
   register: vimrc_link
 
-- name: Create link to ~/.vimrc
+- name: Create link ~/.vimrc
   file: src={{config_base_dir}}/roles/devpc/files/.vimrc dest=/home/{{userid}}/.vimrc owner={{userid}} group={{userid}} state=link
   when: not vimrc_link.stat.exists
+
+- name: Vim - checkout vundle repo
+  git: repo=https://github.com/gmarik/vundle.vim.git dest='/home/{{userid}}/.vim/bundle/vundle.vim'
+
+- name: Check link ~/.vim/colors
+  stat: path=/home/{{userid}}/.vim/colors
+  register: vimcolors_link
+
+- name: Create link ~/.vim/colors
+  file: src={{config_base_dir}}/roles/devpc/files/.vim/colors dest=/home/{{userid}}/.vim/colors owner={{userid}} group={{userid}} state=link
+  when: not vimcolors_link.stat.exists
+
+- name: Vim - run bundle install
+  command: vim +BundleInstall +qall
+  when: not vimcolors_link.stat.exists

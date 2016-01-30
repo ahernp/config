@@ -1,34 +1,13 @@
 " Use Vundle to manage plugins
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
+set rtp+=~/.vim/bundle/vundle.vim/
 call vundle#rc()
 
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'kien/ctrlp.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-"Plugin 'altercation/vim-colors-solarized'
-
-filetype plugin indent on
 
 " Settings for vim-powerline
 set laststatus=2
-
-" Settings for ctrlp
-let g:ctrlp_max_height=30
-let g:ctrlp_follow_symlinks=1
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
-" Settings for ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit="horizontal"
-
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -47,13 +26,10 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim https://raw.githubusercontent.com/ahernp/config/master/wombat256mod.vim
 set t_Co=256
 color wombat256mod
 syntax enable
 set background=dark
-"colorscheme solarized
 
 " Enable syntax highlighting
 filetype off
