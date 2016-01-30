@@ -19,3 +19,8 @@
   copy: >
     src=/home/{{userid}}/Documents/ahernp.com/local_secrets.json
     dest=/home/{{userid}}/code/ahernp.com/ahernp/secrets.json
+
+- name: Initiate virtualenv
+  pip: >
+    virtualenv="/home/{{userid}}/.virtualenvs/ahernp"
+    requirements=/home/{{userid}}/code/ahernp.com/requirements/local.txt
