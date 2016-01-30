@@ -1,0 +1,21 @@
+---
+# Setup development environment for development. Tested on devpc.
+
+# Clone repositories
+- name: Checkout repositories
+  git: >
+    repo=git@github.com:ahernp/{{item}}.git
+    dest=/home/{{userid}}/code/{{item}}
+    update=no
+  with_items:
+    - ahernp.com
+    - config
+    - django-bugtracker
+    - django-feedreader
+    - django-monitoring
+    - DMCM
+
+- name: Populate secrets.json
+  copy: >
+    src=/home/{{userid}}/Documents/ahernp.com/local_secrets.json
+    dest=/home/{{userid}}/code/ahernp.com/ahernp/secrets.json

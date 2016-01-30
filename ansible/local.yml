@@ -4,4 +4,7 @@
   connection: local
 
   roles:
+    # Development PC
     - devpc
+    # Development Environment
+    - devenv

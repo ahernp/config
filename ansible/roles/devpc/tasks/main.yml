@@ -154,13 +154,8 @@
   user: name={{userid}} shell=/usr/bin/zsh
   become: yes
 
-- name: Check file ~/.zsh_history
-  stat: path=/home/{{userid}}/.zsh_history
-  register: zsh_history_file
-
 - name: Populate ~/.zsh_history
   copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history
-  when: not zsh_history_file.stat.exists
 
 
 # Install Pycharm
