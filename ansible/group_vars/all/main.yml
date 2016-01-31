@@ -2,3 +2,7 @@
 
 userid: ahernp
 config_base_dir: /home/ahernp/code/config/ansible
+
+database_name: dmcm
+database_userid: dmcm
+database_password: "{{vault_database_password}}"

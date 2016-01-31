@@ -133,6 +133,22 @@
   file: src={{config_base_dir}}/roles/devpc/files/fabfile.py dest=/home/{{userid}}/fabfile.py state=link
   when: not fabfile_link.stat.exists
 
+- name: Check link ~/.psqlrc
+  stat: path=//home/{{userid}}/.psqlrc
+  register: psqlrc_link
+
+- name: Create link ~/.psqlrc
+  file: src={{config_base_dir}}/roles/devpc/files/.psqlrc dest=/home/{{userid}}/.psqlrc state=link
+  when: not psqlrc_link.stat.exists
+
+- name: Check link ~/.my.cnf
+  stat: path=//home/{{userid}}/.my.cnf
+  register: my_cnf_link
+
+- name: Create link ~/.my.cnf
+  file: src={{config_base_dir}}/roles/devpc/files/.my.cnf dest=/home/{{userid}}/.my.cnf state=link
+  when: not my_cnf_link.stat.exists
+
 - name: Check link ~/.gitconfig
   stat: path=//home/{{userid}}/.gitconfig
   register: gitconfig_link
@@ -141,7 +157,7 @@
   file: src={{config_base_dir}}/roles/devpc/files/.gitconfig dest=/home/{{userid}}/.gitconfig state=link
   when: not gitconfig_link.stat.exists
 
-# Activate zshrc
+# Setup zshrc
 - name: Check link ~/.zshrc
   stat: path=//home/{{userid}}/.zshrc
   register: zshrc_link
@@ -155,7 +171,7 @@
   become: yes
 
 - name: Populate ~/.zsh_history
-  copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history
+  copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history force=no
 
 
 # Install Pycharm

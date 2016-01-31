@@ -16,11 +16,25 @@
     - DMCM
 
 - name: Populate secrets.json
-  copy: >
-    src=/home/{{userid}}/Documents/ahernp.com/local_secrets.json
-    dest=/home/{{userid}}/code/ahernp.com/ahernp/secrets.json
+  template: src=secrets.json dest=/home/{{userid}}/code/ahernp.com/ahernp/secrets.json
 
-- name: Initiate virtualenv
+- name: Setup virtualenv
   pip: >
     virtualenv="/home/{{userid}}/.virtualenvs/ahernp"
     requirements=/home/{{userid}}/code/ahernp.com/requirements/local.txt
+
+# PostgreSQL
+- name: Create PostgreSQL database {{database_name}}
+  postgresql_db: name={{database_name}} login_user=postgres
+  become: yes
+  become_user: postgres
+
+- name: Create user in PostgreSQL
+  postgresql_user: >
+    db={{database_name}}
+    name={{database_userid}}
+    password={{database_password}}
+    priv=ALL
+    login_user=postgres
+  become: yes
+  become_user: postgres
