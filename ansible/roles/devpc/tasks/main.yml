@@ -91,6 +91,10 @@
 
 
 # Pip
+- name: Upgrade Pip to latest
+  pip: name=pip state=latest
+  become: yes
+
 - name: Install pip packages
   pip: name={{item}}
   with_items:
@@ -124,6 +128,7 @@
 # Config files
 - name: Populate /etc/hosts
   copy: src={{config_base_dir}}/roles/devpc/files/hosts dest=/etc/hosts mode="u=rw,g=r,o=r"
+  become: yes
 
 - name: Check link ~/fabfile.py
   stat: path=//home/{{userid}}/fabfile.py
