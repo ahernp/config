@@ -25,7 +25,7 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 # Show function names
 echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
-alias ap='workon ahernp;cd ~/code/django-ahernp/ahernp'
+alias ap='workon ahernp;cd ~/code/ahernp.com/ahernp'
 alias dev='workon dev;cd ~/code/dev'
 alias demo='workon demo;cd ~/code/demo'
 alias perf='workon perf;cd ~/code/perf'

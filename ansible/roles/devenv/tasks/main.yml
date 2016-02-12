@@ -7,6 +7,7 @@
     repo=git@github.com:ahernp/{{item}}.git
     dest=/home/{{userid}}/code/{{item}}
     update=no
+    accept_hostkey=yes
   with_items:
     - ahernp.com
     - config

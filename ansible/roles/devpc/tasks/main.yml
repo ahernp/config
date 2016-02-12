@@ -28,6 +28,7 @@
     - postgresql-contrib
     - python-dev
     - python-pip
+    - python-psycopg2
     - python-sphinx
     - rar
     - speedcrunch
