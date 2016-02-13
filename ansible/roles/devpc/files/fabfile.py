@@ -29,11 +29,8 @@ def timer(func, *args, **kwargs):
 
 
 def rsync(source, dest):
-    """Two-way rsync."""
+    """Copy files from source to destination.."""
     command = 'rsync -auvp --exclude \'*.pyc\' --stats --modify-window=1 %s/ %s' % (source, dest)
-    print('Running \'%s\'' % (command))
-    local(command)
-    command = 'rsync -auv --stats --modify-window=1 %s/ %s' % (dest, source)
     print('Running \'%s\'' % (command))
     local(command)
 
@@ -75,8 +72,8 @@ def full_backup():
 def check_git_status():
     """Check status of all local repositories."""
     REPOSITORIES = ['django-bugtracker', 'django-monitoring',
-                    'config', 'django-ahernp',
-                    'django-dmcm', 'django-feedreader']
+                    'config', 'ahernp.com',
+                    'DMCM', 'django-feedreader']
     for repository in REPOSITORIES:
         with lcd('/home/ahernp/code/%s' % (repository)):
             local('pwd')
