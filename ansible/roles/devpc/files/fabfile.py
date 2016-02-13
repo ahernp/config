@@ -43,13 +43,6 @@ def rsync(source, dest):
 @timer
 def backup():
     """Simple backup of local directories to USB drive."""
-    CONFIG_FILES = ['~/.zshrc', '~/.vimrc', '/etc/hosts', '~/fabfile.py',
-                    '~/.gitconfig', '~/.psqlrc']
-    with lcd('/home/ahernp/'):
-        for config_file in CONFIG_FILES:
-            filename = config_file.split('/')[-1]
-            local('cp -u %s ~/Desktop/work/config/%s' % (config_file, filename))
-            local('cp -u %s ~/code/config/%s' % (config_file, filename))
     for disk in ['SANDISK', '8B88-583A', 'HP v165w']:
         if os.path.exists('/media/ahernp/%s/work' % disk):
             rsync('~/Documents', '"/media/ahernp/%s/Documents"' % disk)
