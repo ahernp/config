@@ -30,7 +30,7 @@ def timer(func, *args, **kwargs):
 
 def rsync(source, dest):
     """Two-way rsync."""
-    command = 'rsync -auv --exclude \'*.pyc\' --stats --modify-window=1 %s/ %s' % (source, dest)
+    command = 'rsync -auvp --exclude \'*.pyc\' --stats --modify-window=1 %s/ %s' % (source, dest)
     print('Running \'%s\'' % (command))
     local(command)
     command = 'rsync -auv --stats --modify-window=1 %s/ %s' % (dest, source)
