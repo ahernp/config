@@ -185,6 +185,6 @@
   apt_repository: repo='ppa:mystic-mirage/pycharm'
   become: yes
 
-- name: Install pycharm package
+- name: Install pycharm package (long running)
   apt: pkg=pycharm state=installed
   become: yes

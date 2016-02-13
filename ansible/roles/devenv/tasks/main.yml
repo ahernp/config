@@ -25,7 +25,7 @@
     requirements=/home/{{userid}}/code/ahernp.com/requirements/local.txt
 
 # PostgreSQL
-- name: Create PostgreSQL database {{database_name}}
+- name: Create PostgreSQL database
   postgresql_db: name={{database_name}} login_user=postgres
   become: yes
   become_user: postgres
