@@ -35,7 +35,17 @@
     db={{database_name}}
     name={{database_userid}}
     password={{database_password}}
-    priv=ALL
+    role_attr_flags=CREATEDB
+    login_user=postgres
+  become: yes
+  become_user: postgres
+
+- name: Grant access to database
+  postgresql_privs: >
+    db={{database_name}}
+    roles={{database_userid}}
+    privs=ALL
+    type=database
     login_user=postgres
   become: yes
   become_user: postgres
