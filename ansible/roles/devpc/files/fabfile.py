@@ -40,10 +40,12 @@ def rsync(source, dest):
 @timer
 def backup():
     """Simple backup of local directories to USB drive."""
+    local('find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;')  # delete old accounts files
     for disk in ['SANDISK', '8B88-583A', 'HP v165w']:
         if os.path.exists('/media/ahernp/%s/work' % disk):
             rsync('~/Documents', '"/media/ahernp/%s/Documents"' % disk)
             rsync('~/Desktop/work', '"/media/ahernp/%s/work"' % disk)
+            rsync('"/media/ahernp/%s/work"' % disk, '~/Desktop/work')  # Copy changes from disk
 
 
 @task
@@ -55,7 +57,7 @@ def full_backup():
         source = '/home/ahernp/%s/' % (directory)
         dest = '/media/ahernp/Iomega HDD/archive/%s' % (directory)
         print('# Backing up newer versions of files in %s to %s' % (source, dest))
-        local('rsync -auv --stats --modify-window=1 --delete "%s" "%s"' % (source, dest))
+        local('rsync -auvp --stats --modify-window=1 --delete "%s" "%s"' % (source, dest))
 
     backup('Desktop/work')
     backup('Documents')

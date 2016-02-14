@@ -6,11 +6,13 @@
   with_items:
     - ack-grep
     - byobu
+    - calibre
     - chromium-browser
     - curl
     - fabric
     - flashplugin-installer
     - geany
+    - gimp
     - git
     - gksu
     - gnucash
@@ -188,3 +190,7 @@
 - name: Install pycharm package (long running)
   apt: pkg=pycharm state=installed
   become: yes
+
+# Initialise Unity Launcher
+- name: Populate Unity Launcher
+  command: gsettings set com.canonical.Unity.Launcher favorites "['application://firefox.desktop', 'application://byobu.desktop', 'application://jetbrains-pycharm.desktop', 'application://org.gnome.Nautilus.desktop', 'application://geany.desktop', 'application://speedcrunch.desktop', 'application://gnucash.desktop', 'application://libprs500.desktop', 'application://thunderbird.desktop', 'application://chromium-browser.desktop', 'application://unity-control-center.desktop', 'application://steam.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
