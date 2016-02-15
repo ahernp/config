@@ -47,6 +47,12 @@ def backup():
             rsync('~/Desktop/work', '"/media/ahernp/%s/work"' % disk)
             rsync('"/media/ahernp/%s/work"' % disk, '~/Desktop/work')  # Copy changes from disk
 
+    # Restore permissions on private keys
+    local('chmod o-rx ~/.ssh/github/id_rsa')
+    local('chmod g-rx ~/.ssh/github/id_rsa')
+    local('chmod o-rx ~/.ssh/id_rsa')
+    local('chmod g-rx ~/.ssh/id_rsa')
+
 
 @task
 @hosts('localhost')
