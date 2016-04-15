@@ -4,7 +4,6 @@
 - name: Install apt packages
   apt: pkg={{item}} state=installed
   with_items:
-    - ack-grep
     - byobu
     - calibre
     - chromium-browser
@@ -33,6 +32,7 @@
     - python-psycopg2
     - python-sphinx
     - rar
+    - silversearcher-ag
     - speedcrunch
     - sqlite3
     - ssh
