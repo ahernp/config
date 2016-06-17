@@ -5,6 +5,7 @@ set rtp+=~/.vim/bundle/vundle.vim/
 call vundle#rc()
 
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'leafgarland/typescript-vim'
 
 " Settings for vim-powerline
 set laststatus=2
@@ -86,3 +87,6 @@ map <Leader>p :set paste<CR>o<ESC>]p:set nopaste<cr>
 " Treat everything as UTF-8
 set encoding=utf-8
 set fileencodings=utf-8
+
+set wrap
+

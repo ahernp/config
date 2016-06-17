@@ -69,6 +69,9 @@
 - name: Vim - checkout vundle repo
   git: repo=https://github.com/gmarik/vundle.vim.git dest='/home/{{userid}}/.vim/bundle/vundle.vim'
 
+- name: Vim - checkout typescript syntax highlighting
+  git: repo=https://github.com/leafgarland/typescript-vim.git dest='/home/{{userid}}/.vim/bundle/typescript-vim.vim'
+
 - name: Check link ~/.vim/colors
   stat: path=/home/{{userid}}/.vim/colors
   register: vimcolors_link
