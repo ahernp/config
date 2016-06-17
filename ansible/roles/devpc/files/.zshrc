@@ -25,9 +25,6 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
 alias ap='workon ahernp;cd ~/code/ahernp.com/ahernp'
-alias dev='workon dev;cd ~/code/dev'
-alias demo='workon demo;cd ~/code/demo'
-alias perf='workon perf;cd ~/code/perf'
 
 # zsh history
 HISTFILE=~/.zsh_history
@@ -52,3 +49,9 @@ bindkey "^[[1~"  beginning-of-line
 bindkey "^[[4~"  end-of-line
 bindkey "^[[3~"  delete-char
 bindkey "^[3;5~" delete-char
+
+# Activate zshrc syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Global NodeJS
+export PATH="$HOME/.node_modules_global/bin:$PATH"
