@@ -65,6 +65,9 @@
 - name: Vim - checkout vundle repo
   git: repo=https://github.com/gmarik/vundle.vim.git dest='/home/{{userid}}/.vim/bundle/vundle.vim'
 
+- name: Vim - checkout typescript syntax highlighting
+  git: repo=https://github.com/leafgarland/typescript-vim.git dest='/home/{{userid}}/.vim/bundle/typescript-vim.vim'
+
 - name: Check link ~/.vim/colors
   stat: path=/home/{{userid}}/.vim/colors
   register: vimcolors_link
@@ -176,6 +179,9 @@
 - name: Populate ~/.zsh_history
   copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history force=no
 
+- name: Checkout typescript syntax highlighting
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest='/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+  become: yes
 
 # Install Pycharm
 - name: Add Pycharm repository
