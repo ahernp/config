@@ -44,11 +44,12 @@ def rsync(source, dest):
 def backup():
     """Simple backup of local directories to USB drive."""
     local('find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;')  # delete old accounts files
-    for disk in ['SANDISK', '8B88-583A', 'HP v165w']:
+    for disk in ['KINGSTON', '8B88-583A', 'HP v165w']:
         if os.path.exists('/media/%s/%s/work' % (current_userid, disk)):
             rsync('~/Documents', '"/media/%s/%s/Documents"' % (current_userid, disk))
             rsync('~/Desktop/work', '"/media/%s/%s/work"' % (current_userid, disk))
             rsync('"/media/%s/%s/work"' % (current_userid, disk), '~/Desktop/work')  # Copy changes from disk
+            break
 
     # Restore permissions on private keys
     local('chmod o-rx ~/.ssh/github/id_rsa')
@@ -64,15 +65,18 @@ def full_backup():
     """Backup local directories."""
     def backup(directory):
         source = '/home/%s/%s/' % (current_userid, directory)
-        dest = '/media/%s/Iomega HDD/archive/%s' % (current_userid, directory)
-        print('# Backing up newer versions of files in %s to %s' % (source, dest))
-        local('rsync -auvp --stats --modify-window=1 --delete "%s" "%s"' % (source, dest))
+        for disk in ['KINGSTON', 'Iomega HDD']:
+            if os.path.exists('/media/%s/%s/archive/Desktop/work' % (current_userid, disk)):
+                dest = '/media/%s/%s/archive/%s' % (current_userid, disk, directory)
+                print('# Backing up newer versions of files in %s to %s' % (source, dest))
+                local('rsync -auvp --stats --modify-window=1 --delete "%s" "%s"' % (source, dest))
+                break
 
     backup('Desktop/work')
     backup('Documents')
     #backup('dos')
     backup('ebooks')
-    backup('Music')
+    #backup('Music')
     backup('Pictures')
     backup('Spoken')
     #backup('Videos')
