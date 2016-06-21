@@ -96,15 +96,15 @@
   pip: name=pip state=latest
   become: yes
 
-#- name: Install pip packages
-#  pip: name={{item}}
-#  with_items:
-#    - decorator
-#    - django
-#    - fabric
-#    - glances
-#    - pypandoc
-#  become: yes
+- name: Install pip packages
+  pip: name={{item}}
+  with_items:
+    - decorator
+    - django
+    - fabric
+    - glances
+    - pypandoc
+  become: yes
 
 
 # vcprompt
@@ -180,7 +180,7 @@
   copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history force=no
 
 - name: Checkout typescript syntax highlighting
-  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest='/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest='/usr/local/share/'
   become: yes
 
 # Install Pycharm
