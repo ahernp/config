@@ -14,6 +14,7 @@ alias ls='ls -Fh --color=auto'
 alias glog='hg glog -l9 --style compact'
 alias test='fab test'
 alias run='fab runserver'
+alias start='fab start'
 alias backup='cd ~;fab backup;cd -'
 alias cc='cd ~;fab check_git_status;cd -'
 alias vi='vi -p'
@@ -25,6 +26,7 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
 alias ap='workon ahernp;cd ~/code/ahernp.com/ahernp'
+alias ad='workon ad;cd ~/code/angular-django/angular'
 
 # zsh history
 HISTFILE=~/.zsh_history

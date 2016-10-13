@@ -76,7 +76,7 @@ def full_backup():
     backup('Documents')
     #backup('dos')
     backup('ebooks')
-    #backup('Music')
+    backup('Music')
     backup('Pictures')
     backup('Spoken')
     #backup('Videos')
