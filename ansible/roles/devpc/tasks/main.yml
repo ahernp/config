@@ -23,13 +23,13 @@
     - mercurial
     - numlockx
     - pandoc
+    - postgresql
     - python-dev
     - python-pip
     - python-sphinx
     - rar
     - silversearcher-ag
     - speedcrunch
-    - sqlite3
     - ssh
     - subversion
     - synapse
