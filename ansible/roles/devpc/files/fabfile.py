@@ -86,9 +86,7 @@ def full_backup():
 @hosts('localhost')
 def check_git_status():
     """Check status of all local repositories."""
-    REPOSITORIES = ['django-bugtracker', 'django-monitoring',
-                    'config', 'ahernp.com',
-                    'DMCM', 'django-feedreader']
+    REPOSITORIES = ['angular-django', 'config']
     for repository in REPOSITORIES:
         with lcd('/home/%s/code/%s' % (current_userid, repository)):
             local('pwd')
