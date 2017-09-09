@@ -4,14 +4,44 @@
   hosts: localhost
   connection: local
 
+  vars:
+  - container_name: my-solr
+  - core_name: core1
+  - solar_config: /opt/solr/server/solr
+
   tasks:
+  - name: Fail if docker is not installed
+    command: docker
+
+  - name: Create solr configuration directory
+    file:
+      path: "{{solar_config}}"
+      state: directory
+      owner: root
+      group: root
+      mode: 0775
+    become: yes
+    become_method: sudo
+
   - name: Create a solr docker container
     docker:
-      name: my-solr
+      name: "{{container_name}}"
       hostname: solr
       image: solr:6.6
       state: started
       restart_policy: always
       pull: always
       ports: 8983:8983
+      volumes: "{{solar_config}}:/opt/solr/server/solr"
 
+  - name: add container {{container_name}} to inventory
+    add_host:
+      name: "{{container_name}}"
+      ansible_connection: docker
+    changed_when: false
+
+  - name: Create core {{core_name}} in container {{container_name}} if missing
+    delegate_to: "{{container_name}}"
+    raw: test ! -e /opt/solr/server/solr/{{core_name}} && solr create_core -c {{core_name}}
+    failed_when: result.rc not in [0,1]
+    register: result
