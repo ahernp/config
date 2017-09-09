@@ -1,0 +1,17 @@
+---
+
+- name: Setup docker-solr on the local machine
+  hosts: localhost
+  connection: local
+
+  tasks:
+  - name: Create a solr docker container
+    docker:
+      name: my-solr
+      hostname: solr
+      image: solr:6.6
+      state: started
+      restart_policy: always
+      pull: always
+      ports: 8983:8983
+
