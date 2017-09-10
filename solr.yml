@@ -28,7 +28,7 @@
       delay: 10
 
   - name: Create core {{core_name}} on container {{container_name}}
-    command: docker exec -i {{container_name}} bin/solr create_core -c {{core_name}}
+    command: docker exec {{container_name}} bin/solr create_core -c {{core_name}}
 
   - name: Reset schema of core {{core_name}} on container {{container_name}}
     command: docker cp files/{{core_name}}-managed-schema {{container_name}}:/opt/solr/server/solr/pages/conf/managed-schema
@@ -36,6 +36,13 @@
   - name: Restart container {{container_name}}
     command: docker restart {{container_name}}
 
+  - name: Wait for container {{container_name}} to start
+    wait_for:
+      port: 8983
+      delay: 10
 
-#  - name: Load data on core {{core_name}} on container {{container_name}}
-#    command: docker exec -i {{container_name}} bin/post -c {{core_name}} data.xml
+  - name: Copy {{core_name}} data to container {{container_name}}
+    command: docker cp files/{{core_name}}-data.json {{container_name}}:/opt/solr/{{core_name}}-data.json
+
+  - name: Load data into core {{core_name}} on container {{container_name}}
+    command: docker exec {{container_name}} bin/post -c {{core_name}} {{core_name}}-data.json
