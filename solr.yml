@@ -1,29 +1,18 @@
 ---
 
-- name: Setup docker-solr on the local machine
+- name: Create docker-solr on the local machine
   hosts: localhost
   connection: local
 
   vars:
   - container_name: my-solr
-  - core_name: core1
-  - solar_config: /opt/solr/server/solr
+  - core_name: pages
 
   tasks:
   - name: Fail if docker is not installed
     command: docker
 
-  - name: Create solr configuration directory
-    file:
-      path: "{{solar_config}}"
-      state: directory
-      owner: root
-      group: root
-      mode: 0775
-    become: yes
-    become_method: sudo
-
-  - name: Create a solr docker container
+  - name: Create solr docker container {{container_name}}
     docker:
       name: "{{container_name}}"
       hostname: solr
@@ -32,16 +21,21 @@
       restart_policy: always
       pull: always
       ports: 8983:8983
-      volumes: "{{solar_config}}:/opt/solr/server/solr"
 
-  - name: add container {{container_name}} to inventory
-    add_host:
-      name: "{{container_name}}"
-      ansible_connection: docker
-    changed_when: false
+  - name: Wait for container {{container_name}} to start
+    wait_for:
+      port: 8983
+      delay: 10
 
-  - name: Create core {{core_name}} in container {{container_name}} if missing
-    delegate_to: "{{container_name}}"
-    raw: test ! -e /opt/solr/server/solr/{{core_name}} && solr create_core -c {{core_name}}
-    failed_when: result.rc not in [0,1]
-    register: result
+  - name: Create core {{core_name}} on container {{container_name}}
+    command: docker exec -i {{container_name}} bin/solr create_core -c {{core_name}}
+
+  - name: Reset schema of core {{core_name}} on container {{container_name}}
+    command: docker cp files/{{core_name}}-managed-schema {{container_name}}:/opt/solr/server/solr/pages/conf/managed-schema
+
+  - name: Restart container {{container_name}}
+    command: docker restart {{container_name}}
+
+
+#  - name: Load data on core {{core_name}} on container {{container_name}}
+#    command: docker exec -i {{container_name}} bin/post -c {{core_name}} data.xml
