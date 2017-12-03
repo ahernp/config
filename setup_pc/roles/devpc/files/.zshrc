@@ -23,9 +23,9 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 # Show function names
 echo "Virtual Enviroment aliases:"
 grep "workon" ~/.zshrc
-alias ad='workon ad;cd ~/code/angular-django/angular'
-alias run='workon ad;cd ~/code/angular-django/angular;fab runserver'
-alias dj='workon ad;cd ~/code/angular-django/django'
+alias ad='workon ahernp;cd ~/code/ahernp/client'
+alias run='workon ahernp;cd ~/code/ahernp/server;docker-compose up'
+alias dj='workon ahernp;cd ~/code/ahernp/server'
 
 # zsh history
 HISTFILE=~/.zsh_history
