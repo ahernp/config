@@ -1,7 +1,7 @@
 ---
 
 userid: ahernp
-config_base_dir: /home/ahernp/code/config/ansible
+config_base_dir: /home/ahernp/code/config/setup_pc
 
 database_name: dmcm
 database_userid: dmcm

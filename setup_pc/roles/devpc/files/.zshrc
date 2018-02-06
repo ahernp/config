@@ -16,16 +16,8 @@ alias test='fab test'
 alias backup='cd ~;fab backup;cd -'
 alias cc='cd ~;fab check_git_status;cd -'
 alias vi='vi -p'
-
-# Virtual environments
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-
-# Show function names
-echo "Virtual Enviroment aliases:"
-grep "workon" ~/.zshrc
-alias ad='workon ahernp;cd ~/code/ahernp/client'
-alias run='workon ahernp;cd ~/code/ahernp/server;docker-compose up'
-alias dj='workon ahernp;cd ~/code/ahernp/server'
+alias port='sudo docker run --name portainer --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer'
+alias db='sudo docker exec -it ahernp_db_1 psql -U postgres'pip3
 
 # zsh history
 HISTFILE=~/.zsh_history

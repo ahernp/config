@@ -1,44 +1,25 @@
 ---
-# Setup local PC; Tested on Ubuntu 15.10
+# Setup local PC; Tested on Ubuntu 17.10
 
 - name: Install apt packages
   apt: pkg={{item}} state=installed
   with_items:
+    - brasero
     - byobu
     - calibre
-    - chromium-browser
-    - curl
     - fabric
-    - flashplugin-installer
     - geany
-    - gimp
     - git
-    - gksu
     - gnucash
     - htop
-    - icedtea-plugin
-    - inkscape
-    - ipython
-    - libpq-dev
-    - mercurial
-    - numlockx
-    - pandoc
-    - postgresql
-    - python-dev
+#    - python-dev
     - python-pip
-    - python-sphinx
-    - rar
+    - python3-pip
+#    - python-sphinx
     - silversearcher-ag
     - speedcrunch
-    - ssh
-    - subversion
-    - synapse
-    - synaptic
-    - tasksel
-    - traceroute
     - tree
     - vim
-    - virtualenvwrapper
     - zsh
   become: yes
 
@@ -100,14 +81,12 @@
   pip: name={{item}}
   with_items:
     - decorator
-    - django
     - fabric
     - glances
-    - pypandoc
   become: yes
 
 
-# vcprompt
+ # vcprompt
 - name: Check link /usr/local/bin/vcprompt
   stat: path=/usr/local/bin/vcprompt
   register: vcprompt_link
@@ -139,22 +118,6 @@
   file: src={{config_base_dir}}/roles/devpc/files/fabfile.py dest=/home/{{userid}}/fabfile.py state=link
   when: not fabfile_link.stat.exists
 
-- name: Check link ~/.psqlrc
-  stat: path=//home/{{userid}}/.psqlrc
-  register: psqlrc_link
-
-- name: Create link ~/.psqlrc
-  file: src={{config_base_dir}}/roles/devpc/files/.psqlrc dest=/home/{{userid}}/.psqlrc state=link
-  when: not psqlrc_link.stat.exists
-
-- name: Check link ~/.my.cnf
-  stat: path=//home/{{userid}}/.my.cnf
-  register: my_cnf_link
-
-- name: Create link ~/.my.cnf
-  file: src={{config_base_dir}}/roles/devpc/files/.my.cnf dest=/home/{{userid}}/.my.cnf state=link
-  when: not my_cnf_link.stat.exists
-
 - name: Check link ~/.gitconfig
   stat: path=//home/{{userid}}/.gitconfig
   register: gitconfig_link
@@ -180,18 +143,5 @@
   copy: src={{config_base_dir}}/roles/devpc/files/.zsh_history dest=/home/{{userid}}/.zsh_history force=no
 
 - name: Checkout typescript syntax highlighting
-  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest='/usr/local/share/'
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest='/usr/local/share/zsh-syntax-highlighting'
   become: yes
-
-# Install Pycharm
-- name: Add Pycharm repository
-  apt_repository: repo='ppa:mystic-mirage/pycharm'
-  become: yes
-
-- name: Install pycharm package (long running)
-  apt: pkg=pycharm state=installed
-  become: yes
-
-# Initialise Unity Launcher
-- name: Populate Unity Launcher
-  command: gsettings set com.canonical.Unity.Launcher favorites "['application://firefox.desktop', 'application://byobu.desktop', 'application://jetbrains-pycharm.desktop', 'application://org.gnome.Nautilus.desktop', 'application://geany.desktop', 'application://speedcrunch.desktop', 'application://gnucash.desktop', 'application://libprs500.desktop', 'application://thunderbird.desktop', 'application://chromium-browser.desktop', 'application://unity-control-center.desktop', 'application://steam.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
