@@ -6,6 +6,8 @@ WORKDIR /app
 
 USER node
 
+EXPOSE 4200
+
 RUN npm install -g @angular/cli
 
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
