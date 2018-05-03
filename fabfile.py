@@ -38,3 +38,30 @@ def setup_pc():
         file_path = '{curr_dir}/files/{filename}'.format(curr_dir=CURR_DIR, filename=filename)
         local('ln -s {file_path} {link_path}'.format(file_path=file_path, link_path=link_path))
 
+    # vim
+    local('git clone https://github.com/gmarik/vundle.vim.git ~/.vim/bundle/vundle.vim '
+          '|| cd ~/.vim/bundle/vundle.vim; git pull')
+    local('git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/bundle/typescript-vim.vim '
+          '|| cd ~/.vim/bundle/typescript-vim.vim; git pull')
+    link_path = '~/.vim/colors'
+    if is_link(link_path):
+        local('rm {link_path}'.format(link_path=link_path))
+    local('ln -s {file_path} ~/.vim/colors')
+    local('vim +BundleInstall +qall')
+
+    # Byobu
+    if not exists('~/.byobu/backend'):
+        local('byobu-select-backend screen')
+
+    # vcprompt
+    if not exists('/usr/local/bin/vcprompt'):
+        local('ln -s {curr_dir}/files/vcprompt /usr/local/bin/vcprompt'.format(curr_dir=CURR_DIR))
+    #local('chmod a+x {curr_dir}/files/vcprompt'.format(curr_dir=CURR_DIR))
+
+    local('sudo cp {curr_dir}/files/hosts /etc/hosts')
+    local('sudo chmod u=rw,g=r,o=r /etc/hosts')
+
+    # Switch to .zshrc
+    local('chsh -s /usr/bin/zsh')
+    local('sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/local/share/zsh-syntax-highlighting '
+          '|| cd /usr/local/share/zsh-syntax-highlighting; sudo git pull')
