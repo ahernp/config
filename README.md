@@ -3,11 +3,6 @@ config
 
 Configuration Files
 
-## Ansible
+`fabfile.py`  Fabric file containing task to configure a fresh Ubuntu desktop install. Tested with 18.04.
 
-* `setup_pc/` Local PC Setup
-* `solr.yml` Stand-alone playbook to create docker-solr container on local PC.
-
-## Docker
-
-* `angular-cli` Container running `angular-cli`
+Run `sudo apt install fabric` as a prerequisite.

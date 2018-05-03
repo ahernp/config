@@ -1,0 +1,5 @@
+\timing on
+\set PROMPT1 '%M %n@%[%033[1;36m%]%/%[%033[0m%]%R%# '
+\set PROMPT2 '[more] %R > '
+\set VERBOSITY verbose
+\x auto
