@@ -18,7 +18,7 @@ def setup_pc():
     """Setup Ubuntu Desktop PC."""
 
     APT_PACKAGES = ['byobu', 'calibre', 'geany', 'geany-plugins', 'git', 'gnucash', 'htop',
-                    'screen', 'silversearcher-ag', 'speedcrunch', 'tree', 'vim', 'zsh']
+                    'screen', 'silversearcher-ag', 'speedcrunch', 'tree', 'vim', 'vlc', 'zsh']
     with settings(prompts={'Do you want to continue [Y/n]? ': 'Y'}):
         local('sudo apt install {packages}'.format(packages=' '.join(APT_PACKAGES)))
 
@@ -76,3 +76,9 @@ def setup_pc():
 	with lcd('/tmp'):
 		local('curl -fsSL get.docker.com -o get-docker.sh')
 		local('sudo sh get-docker.sh')
+
+	# Atom
+	local('curl -L https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -')
+	local('sudo sh -c \'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list\'')
+	local('sudo apt-get update')
+	local('sudo apt-get install atom')
