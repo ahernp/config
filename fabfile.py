@@ -51,12 +51,13 @@ def setup_pc():
     if is_link(link_path):
         local('rm {link_path}'.format(link_path=link_path))
     file_path = '{curr_dir}/files/.vim/colors'.format(curr_dir=CURR_DIR)
-    local('ln -s {file_path} ~/.vim/colors')
+    local('ln -s {file_path} ~/.vim/colors'.format(file_path=file_path)
     local('vim +BundleInstall +qall')
 
     # Byobu
     if not exists('~/.byobu/backend'):
         local('byobu-select-backend screen')
+	local('cp {curr_dir}/files/byobu.desktop .local/share/applications/byobu.desktop'.format(curr_dir=curr_dir)
 
     # vcprompt
     if not exists('/usr/local/bin/vcprompt'):
@@ -70,3 +71,8 @@ def setup_pc():
     local('chsh -s /usr/bin/zsh')
     local('sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/local/share/zsh-syntax-highlighting '
           '|| cd /usr/local/share/zsh-syntax-highlighting; sudo git pull')
+
+	# Docker
+	with lcd('/tmp'):
+		local('curl -fsSL get.docker.com -o get-docker.sh')
+		local('sudo sh get-docker.sh')
