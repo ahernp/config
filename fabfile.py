@@ -17,8 +17,8 @@ HOME_DIR = os.environ.get('HOME')
 def setup_pc():
     """Setup Ubuntu Desktop PC."""
 
-    APT_PACKAGES = ['brasero', 'byobu', 'calibre', 'geany', 'geany-plugins', 'git', 'gnucash', 'htop',
-                    'silversearcher-ag', 'speedcrunch', 'tree', 'vim', 'zsh']
+    APT_PACKAGES = ['byobu', 'calibre', 'geany', 'geany-plugins', 'git', 'gnucash', 'htop',
+                    'screen', 'silversearcher-ag', 'speedcrunch', 'tree', 'vim', 'zsh']
     with settings(prompts={'Do you want to continue [Y/n]? ': 'Y'}):
         local('sudo apt install {packages}'.format(packages=' '.join(APT_PACKAGES)))
 
@@ -29,6 +29,10 @@ def setup_pc():
     work_dot_ssh_path = '~/Desktop/work/dot.ssh'
     if exists(work_dot_ssh_path):
         local('ln -s {dir_path} {link_path}'.format(dir_path=work_dot_ssh_path, link_path=link_path))
+    local('chmod o-rx ~/.ssh/github/id_rsa')
+    local('chmod g-rx ~/.ssh/github/id_rsa')
+    local('chmod o-rx ~/.ssh/id_rsa')
+    local('chmod g-rx ~/.ssh/id_rsa')
 
     # Add links to config files to home directory
     for filename in ['.gitconfig', '.vimrc', '.zsh_history', '.zshrc', 'fabfile.py']:
@@ -39,13 +43,14 @@ def setup_pc():
         local('ln -s {file_path} {link_path}'.format(file_path=file_path, link_path=link_path))
 
     # vim
-    local('git clone https://github.com/gmarik/vundle.vim.git ~/.vim/bundle/vundle.vim '
+    local('git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle.vim '
           '|| cd ~/.vim/bundle/vundle.vim; git pull')
     local('git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/bundle/typescript-vim.vim '
           '|| cd ~/.vim/bundle/typescript-vim.vim; git pull')
     link_path = '~/.vim/colors'
     if is_link(link_path):
         local('rm {link_path}'.format(link_path=link_path))
+    file_path = '{curr_dir}/files/.vim/colors'.format(curr_dir=CURR_DIR)
     local('ln -s {file_path} ~/.vim/colors')
     local('vim +BundleInstall +qall')
 
@@ -55,7 +60,7 @@ def setup_pc():
 
     # vcprompt
     if not exists('/usr/local/bin/vcprompt'):
-        local('ln -s {curr_dir}/files/vcprompt /usr/local/bin/vcprompt'.format(curr_dir=CURR_DIR))
+        local('sudo ln -s {curr_dir}/files/vcprompt /usr/local/bin/vcprompt'.format(curr_dir=CURR_DIR))
     #local('chmod a+x {curr_dir}/files/vcprompt'.format(curr_dir=CURR_DIR))
 
     local('sudo cp {curr_dir}/files/hosts /etc/hosts')
