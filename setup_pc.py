@@ -12,7 +12,6 @@ def run(command):
     except OSError as e:
         print('{command} {e}'.format(command=command, e=e))
 
-
 def setup_dot_ssh():
     print('Setup .ssh:')
     home_dot_ssh = '{home_dir}/.ssh'.format(home_dir=HOME_DIR)
@@ -33,8 +32,9 @@ def setup_dot_ssh():
 
 def apt_install():
     print('Install apt packages:')
-    APT_PACKAGES = ['byobu', 'calibre', 'fabric', 'geany', 'geany-plugins', 'git', 'gnucash', 'htop',
-                    'screen', 'silversearcher-ag', 'speedcrunch', 'ssh', 'tree', 'vim', 'vlc', 'zsh']
+    APT_PACKAGES = ['byobu', 'calibre', 'curl', 'docker.io', 'docker-compose', 'fabric', 'geany',
+                    'geany-plugins', 'git', 'gnucash', 'htop', 'screen', 'silversearcher-ag',
+                    'speedcrunch', 'ssh', 'tree', 'vim', 'vlc', 'zsh']
     run('sudo apt install {packages}'.format(packages=' '.join(APT_PACKAGES)))
 
 def add_home_configs():
@@ -79,32 +79,28 @@ def setup_etc_hosts():
 def change_shell_to_zsh():
     print('Change shell to zsh:')
     run('chsh -s /usr/bin/zsh')
-    run('sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/local/share/zsh-syntax-highlighting '
-        '|| cd /usr/local/share/zsh-syntax-highlighting; sudo git pull')
-
-def install_docker():
-    print('Install docker:')
-    run('cd /tmp && curl -fsSL get.docker.com -o get-docker.sh')
-    run('cd /tmp && sudo sh get-docker.sh')
+    run('git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /tmp/zsh-syntax-highlighting')
+    run('sudo mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting')
 
 def install_atom_ide():
     print('Install atom IDE:')
     run('curl -L https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -')
     run('sudo sh -c \'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list\'')
-    run('sudo apt-get update')
-    run('sudo apt-get install atom')
+    run('sudo apt update')
+    run('sudo apt install atom')
 
 def main():
     setup_dot_ssh()
-    apt_install()
-    add_home_configs()
-    setup_vim()
-    setup_byobu()
-    setup_vcprompt()
-    setup_etc_hosts()
-    change_shell_to_zsh()
-    install_docker()
-    install_atom_ide()
+    proceed = input('Check ~/.ssh has been setup. Proceed (y/n): ')
+    if proceed == 'y':
+        apt_install()
+        add_home_configs()
+        setup_vim()
+        setup_byobu()
+        setup_vcprompt()
+        setup_etc_hosts()
+        change_shell_to_zsh()
+        install_atom_ide()
 
 if __name__ == '__main__':
     main()
