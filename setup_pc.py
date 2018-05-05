@@ -7,7 +7,8 @@ CURR_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def run(command):
     try:
-        subprocess.call(command.split())
+        print(command)
+        subprocess.call(command, shell=True)
     except OSError as e:
         print('{command} {e}'.format(command=command, e=e))
 
@@ -24,12 +25,11 @@ def setup_dot_ssh():
 
     if not os.path.isdir(home_dot_ssh) and os.path.isdir(work_dot_ssh_path):
         run('mkdir {home_dot_ssh}'.format(home_dot_ssh=home_dot_ssh))
-        run('cp -r {work_dot_ssh_path} {home_dot_ssh}'.format(work_dot_ssh_path=work_dot_ssh_path,
-                                                              home_dot_ssh=home_dot_ssh))
-        run('chmod o-rx ~/.ssh/github/id_rsa')
-        run('chmod g-rx ~/.ssh/github/id_rsa')
-        run('chmod o-rx ~/.ssh/id_rsa')
-        run('chmod g-rx ~/.ssh/id_rsa')
+        run('cp -r {work_dot_ssh_path}/* {home_dot_ssh}'.format(work_dot_ssh_path=work_dot_ssh_path,
+                                                                home_dot_ssh=home_dot_ssh))
+
+        run('chmod g-rx,o-rx {home_dir}/.ssh/github/id_rsa'.format(home_dir=HOME_DIR))
+        run('chmod g-rx,o-rx {home_dir}/.ssh/id_rsa'.format(home_dir=HOME_DIR))
 
 def apt_install():
     print('Install apt packages:')
@@ -37,14 +37,18 @@ def apt_install():
                     'screen', 'silversearcher-ag', 'speedcrunch', 'ssh', 'tree', 'vim', 'vlc', 'zsh']
     run('sudo apt install {packages}'.format(packages=' '.join(APT_PACKAGES)))
 
-def add_links_from_home_to_configs():
-    print('Add links to home config files:')
+def add_home_configs():
+    print('Add configuration files to home directory:')
     for filename in ['.gitconfig', '.vimrc', '.zsh_history', '.zshrc', 'fabfile.py']:
         link_path = '{home_dir}/{link}'.format(home_dir=HOME_DIR, link=filename)
         run('rm {link_path}'.format(link_path=link_path))
         run('ln -s {curr_dir}/files/{filename} {link_path}'.format(curr_dir=CURR_DIR,
                                                                    filename=filename,
                                                                    link_path=link_path))
+
+    run('rm {home_dir}/.zsh_history'.format(home_dir=HOME_DIR))
+    run('ln -s {curr_dir}/files/.zsh_history {home_dir}/.zsh_history'.format(curr_dir=CURR_DIR,
+                                                                             home_dir=HOME_DIR))
 
 def setup_vim():
     print('Setup vim:')
@@ -53,8 +57,8 @@ def setup_vim():
     run('git clone https://github.com/leafgarland/typescript-vim.git {home_dir}/.vim/bundle/typescript-vim.vim '
         '|| cd {home_dir}/.vim/bundle/typescript-vim.vim; git pull'.format(home_dir=HOME_DIR))
 
-    run('rm {home_dir}~/.vim/colors}'.format(home_dir=HOME_DIR))
-    run('ln -s {curr_dir}/files/.vim/colors {home_dir}~/.vim/colors}'.format(curr_dir=CURR_DIR, home_dir=HOME_DIR))
+    run('rm {home_dir}/.vim/colors'.format(home_dir=HOME_DIR))
+    run('ln -s {curr_dir}/files/.vim/colors {home_dir}/.vim/colors'.format(curr_dir=CURR_DIR, home_dir=HOME_DIR))
     run('vim +BundleInstall +qall')
 
 def setup_byobu():
@@ -93,7 +97,7 @@ def install_atom_ide():
 def main():
     setup_dot_ssh()
     apt_install()
-    add_links_from_home_to_configs()
+    add_home_configs()
     setup_vim()
     setup_byobu()
     setup_vcprompt()
