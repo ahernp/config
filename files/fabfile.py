@@ -7,28 +7,11 @@ from datetime import datetime
 from fabric.api import task, hosts, local, env, settings
 from fabric.colors import magenta
 from fabric.context_managers import lcd
-from decorator import decorator
 
 current_userid = getpass.getuser()
 
 env.hosts = ['web']
 env.user = current_userid
-
-
-@decorator
-def timer(func, *args, **kwargs):
-    """Wrapper which outputs how long a function took to run."""
-    start_time = datetime.now()
-    result = func(*args, **kwargs)
-    end_time = datetime.now()
-    duration = end_time - start_time
-    print(magenta('\n# \'{}\' ran for {} (started at {:%H:%M:%S}, '
-                  'ended at {:%H:%M:%S})'.format(
-                      func.__name__,
-                      duration,
-                      start_time,
-                      end_time)))
-    return result
 
 
 def rsync(source, dest):
@@ -40,7 +23,6 @@ def rsync(source, dest):
 
 @task
 @hosts('localhost')
-@timer
 def backup():
     """Simple backup of local directories to USB drive."""
     local('find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;')  # delete old accounts files
@@ -54,15 +36,12 @@ def backup():
             break
 
     # Restore permissions on private keys
-    local('chmod o-rx ~/.ssh/github/id_rsa')
-    local('chmod g-rx ~/.ssh/github/id_rsa')
-    local('chmod o-rx ~/.ssh/id_rsa')
-    local('chmod g-rx ~/.ssh/id_rsa')
+    local('chmod o-rx,g-rx ~/.ssh/github/id_rsa')
+    local('chmod o-rx,g-rx ~/.ssh/id_rsa')
 
 
 @task
 @hosts('localhost')
-@timer
 def full_backup():
     """Backup local directories."""
     def backup(directory):
@@ -76,19 +55,17 @@ def full_backup():
 
     backup('Desktop/work')
     backup('Documents')
-    #backup('dos')
     backup('ebooks')
     backup('Music')
     backup('Pictures')
     backup('Spoken')
-    #backup('Videos')
 
 
 @task
 @hosts('localhost')
 def check_git_status():
     """Check status of all local repositories."""
-    REPOSITORIES = ['ahernp', 'angular-django', 'config']
+    REPOSITORIES = ['ahernp', 'config']
     for repository in REPOSITORIES:
         with lcd('/home/%s/code/%s' % (current_userid, repository)):
             local('pwd')
