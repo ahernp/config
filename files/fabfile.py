@@ -26,8 +26,6 @@ def rsync(source, dest):
 def backup():
     """Simple backup of local directories to USB drive."""
     local('find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;')  # delete old accounts files
-    local('find ~/Documents/tw5.html_backup -type f -exec rm {} \;')  # delete tiddlywiki backups
-    local('find ~/Desktop/work/tw5Work.html_backup -type f -exec rm {} \;')  # delete tiddlywiki backups
     for disk in ['KINGSTON', '5AA0-ED81']:
         if os.path.exists('/media/%s/%s/work' % (current_userid, disk)):
             rsync('~/Documents', '"/media/%s/%s/Documents"' % (current_userid, disk))
