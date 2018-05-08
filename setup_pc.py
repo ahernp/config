@@ -33,7 +33,7 @@ def setup_dot_ssh():
 def apt_install():
     print('Install apt packages:')
     APT_PACKAGES = ['byobu', 'calibre', 'curl', 'docker.io', 'docker-compose', 'fabric', 'geany',
-                    'geany-plugins', 'git', 'gnucash', 'htop', 'screen', 'silversearcher-ag',
+                    'geany-plugins', 'git', 'gnucash', 'htop', 'hunspell-en-gb', 'screen', 'silversearcher-ag',
                     'speedcrunch', 'ssh', 'tree', 'vim', 'vlc', 'zsh']
     run('sudo apt install {packages}'.format(packages=' '.join(APT_PACKAGES)))
 
