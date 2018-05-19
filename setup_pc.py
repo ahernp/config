@@ -103,7 +103,7 @@ def install_atom_ide():
 
 def setup_devenv():
     print('Setup development environment:')
-    run('ln -s {curr_dir}/files/devenv-docker-compose.yml '
+    run('ln -s {curr_dir}/files/devenv/docker-compose.yml '
         '{parent_dir}/docker-compose.yml'.format(curr_dir=CURR_DIR, parent_dir=PARENT_DIR))
     run('ln -s {curr_dir}/files/devenv/.pylintrc {parent_dir}/.pylintrc'.format(
         curr_dir=CURR_DIR, parent_dir=PARENT_DIR))
