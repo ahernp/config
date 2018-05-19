@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+    devenv:
+        build:
+            context: ./config/files/devenv
+            dockerfile: Dockerfile
+        image: python3:devenv
+        command: pycodestyle ./config/setup_pc.py
+        volumes:
+          - .:/work
