@@ -6,6 +6,6 @@ services:
             context: ./config/files/devenv
             dockerfile: Dockerfile
         image: python3:devenv
-        command: pycodestyle ./config/setup_pc.py
+        command: /opt/devenv/inotify.sh
         volumes:
           - .:/work

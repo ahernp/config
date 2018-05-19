@@ -3,9 +3,7 @@ Simple Backup.
 """
 import getpass
 import os
-from datetime import datetime
-from fabric.api import task, hosts, local, env, settings
-from fabric.colors import magenta
+from fabric.api import task, hosts, local, env
 from fabric.context_managers import lcd
 
 current_userid = getpass.getuser()
