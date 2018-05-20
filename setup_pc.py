@@ -43,14 +43,14 @@ def apt_install():
 
 def add_home_configs():
     print('Add configuration files to home directory:')
-    for filename in ['.gitconfig', '.vimrc', '.zsh_history', '.zshrc', 'fabfile.py']:
+    for filename in ['.gitconfig', '.vimrc', '.zshrc', 'fabfile.py']:
         link_path = '{home_dir}/{link}'.format(home_dir=HOME_DIR, link=filename)
         run('rm {link_path}'.format(link_path=link_path))
         run('ln -s {curr_dir}/files/{filename} {link_path}'.format(curr_dir=CURR_DIR,
                                                                    filename=filename,
                                                                    link_path=link_path))
     run('rm {home_dir}/.zsh_history'.format(home_dir=HOME_DIR))
-    run('ln -s {curr_dir}/files/.zsh_history {home_dir}/.zsh_history'.format(curr_dir=CURR_DIR,
+    run('cp {curr_dir}/files/.zsh_history {home_dir}/.zsh_history'.format(curr_dir=CURR_DIR,
                                                                              home_dir=HOME_DIR))
 
 
