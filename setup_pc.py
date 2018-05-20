@@ -51,7 +51,7 @@ def add_home_configs():
                                                                    link_path=link_path))
     run('rm {home_dir}/.zsh_history'.format(home_dir=HOME_DIR))
     run('cp {curr_dir}/files/.zsh_history {home_dir}/.zsh_history'.format(curr_dir=CURR_DIR,
-                                                                             home_dir=HOME_DIR))
+                                                                          home_dir=HOME_DIR))
 
 
 def setup_vim():
