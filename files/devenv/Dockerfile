@@ -1,5 +1,7 @@
 FROM python:3
 
+ENV PYTHONUNBUFFERED 1
+
 RUN apt-get update && apt-get install -y inotify-tools
 
 RUN mkdir /opt/devenv
