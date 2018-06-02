@@ -171,6 +171,11 @@ def setup_devenv():
             curr_dir=CURR_DIR, parent_dir=PARENT_DIR
         )
     )
+    run(
+        "ln -s {curr_dir}/files/devenv {parent_dir}/devenv".format(
+            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
+        )
+    )
 
 
 def main():

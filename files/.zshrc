@@ -18,7 +18,8 @@ alias port='sudo docker run --name portainer --restart=always -d -p 9000:9000 -v
 alias doc='cd ~/code/react-django;sudo docker-compose up'
 alias db='sudo docker exec -it ahernp_db_1 psql -U postgres'
 alias app='sudo docker exec -it ahernp_webapp_1 python3'
-alias de='cd ~/code/react-django;sudo -E docker-compose'
+alias de='cd ~/code;sudo -E docker-compose'
+alias dev='de run --rm devenv bash'
 
 grep "alias " ~/.zshrc
 

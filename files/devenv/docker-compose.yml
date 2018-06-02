@@ -1,11 +1,43 @@
 version: '3'
 
 services:
+    db:
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD
     devenv:
         build:
-            context: ./config/files/devenv
-            dockerfile: Dockerfile
+            context: ./devenv
         image: python3:devenv
         command: /opt/devenv/inotify.sh
         volumes:
           - .:/work
+    nginx:
+        image: nginx:stable
+        volumes:
+            - ./devenv/nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./devenv/uwsgi_params:/opt/ahernp/uwsgi_params
+            - ./ahernp.com/uwsgi.sock:/opt/ahernp/uwsgi.sock
+            - ./ahernp.com/static:/opt/ahernp/static
+            - ./ahernp.com/media:/opt/ahernp/media
+            - ./ahernp.com/templates:/opt/ahernp/templates
+        depends_on:
+            - webapp
+        ports:
+            - "80:80"
+    webapp:
+        build:
+            context: ./ahernp.com
+        image: webapp:ahernp
+        environment:
+            - AHERNP_DATABASE_USER
+            - AHERNP_DATABASE_PASSWORD
+            - AHERNP_DATABASE_NAME
+            - POSTGRES_PASSWORD
+            - DJANGO_SECRET_KEY
+        command: uwsgi --socket /opt/ahernp/uwsgi.sock --module project.wsgi --chmod-socket=666
+        volumes:
+            - ./ahernp.com:/opt/ahernp
+        working_dir: /opt/ahernp
+        depends_on:
+            - db

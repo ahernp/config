@@ -29,7 +29,7 @@ def backup():
     local(
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
-    for disk in ["KINGSTON", "5AA0-ED81"]:
+    for disk in ["KINGSTON", "hp"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             rsync("~/Documents", '"/media/%s/%s/Documents"' % (current_userid, disk))
             rsync("~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk))
