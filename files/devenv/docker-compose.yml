@@ -35,7 +35,7 @@ services:
             - AHERNP_DATABASE_NAME
             - POSTGRES_PASSWORD
             - DJANGO_SECRET_KEY
-        command: uwsgi --socket /opt/ahernp/uwsgi.sock --module project.wsgi --chmod-socket=666
+        command: uwsgi --socket /opt/ahernp/uwsgi.sock --module project.wsgi --chmod-socket=777
         volumes:
             - ./ahernp.com:/opt/ahernp
         working_dir: /opt/ahernp

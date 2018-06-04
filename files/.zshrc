@@ -15,10 +15,10 @@ alias test='fab test'
 alias backup='cd ~;fab backup;cd -'
 alias vi='vi -p'
 alias port='sudo docker run --name portainer --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer'
-alias doc='cd ~/code/react-django;sudo docker-compose up'
-alias db='sudo docker exec -it ahernp_db_1 psql -U postgres'
-alias app='sudo docker exec -it ahernp_webapp_1 python3'
 alias de='cd ~/code;sudo -E docker-compose'
+alias doc='de up'
+alias sql='de exec db psql -U postgres ahernp'
+alias app='de exec webapp bash'
 alias dev='de run --rm devenv bash'
 
 grep "alias " ~/.zshrc
