@@ -2,11 +2,10 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y inotify-tools
+RUN apt-get update && apt-get install -y inotify-tools ctags vim
 
-RUN mkdir /opt/devenv
-COPY ./* /opt/devenv/
-RUN pip3 install -r /opt/devenv/requirements.txt
+COPY ./* /root/
+RUN pip3 install -r /root/requirements.txt
 
 RUN mkdir /work
 WORKDIR /work
