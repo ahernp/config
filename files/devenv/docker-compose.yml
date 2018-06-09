@@ -9,9 +9,17 @@ services:
         build:
             context: ./devenv
         image: python3:devenv
+        environment:
+            - AHERNP_DATABASE_USER
+            - AHERNP_DATABASE_PASSWORD
+            - AHERNP_DATABASE_NAME
+            - POSTGRES_PASSWORD
+            - DJANGO_SECRET_KEY
         command: /root/inotify.sh
         volumes:
-          - .:/work
+            - .:/work
+        ports:
+            - "8000:8000"
     nginx:
         image: nginx:stable
         volumes:

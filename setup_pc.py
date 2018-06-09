@@ -87,24 +87,12 @@ def add_home_configs():
 
 def setup_vim():
     print("Setup vim:")
-    run(
-        "git clone https://github.com/VundleVim/Vundle.vim {home_dir}/.vim/bundle/vundle.vim "
-        "|| cd {home_dir}/.vim/bundle/vundle.vim; git pull".format(home_dir=HOME_DIR)
-    )
-    run(
-        "git clone https://github.com/leafgarland/typescript-vim.git {home_dir}/.vim/bundle/typescript-vim.vim "
-        "|| cd {home_dir}/.vim/bundle/typescript-vim.vim; git pull".format(
-            home_dir=HOME_DIR
-        )
-    )
-
     run("rm {home_dir}/.vim/colors".format(home_dir=HOME_DIR))
     run(
         "ln -s {curr_dir}/files/.vim/colors {home_dir}/.vim/colors".format(
             curr_dir=CURR_DIR, home_dir=HOME_DIR
         )
     )
-    run("vim +BundleInstall +qall")
 
 
 def setup_byobu():

@@ -19,7 +19,7 @@ alias de='cd ~/code;sudo -E docker-compose'
 alias doc='de up'
 alias sql='de exec db psql -U postgres ahernp'
 alias app='de exec webapp bash'
-alias dev='de run --rm devenv bash'
+alias dev='de exec devenv bash'
 
 grep "alias " ~/.zshrc
 
