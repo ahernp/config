@@ -1,6 +1,6 @@
 set nocompatible
 syntax on
-filetype plugin on
+filetype indent plugin on
 
 set path+=**
 set wildmenu
@@ -11,7 +11,6 @@ set relativenumber
 " Color scheme
 set t_Co=256
 color wombat256mod
-syntax enable
 set background=dark
 
 set hlsearch

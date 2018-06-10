@@ -1,6 +1,6 @@
 set nocompatible
 syntax on
-filetype plugin on
+filetype indent plugin on
 
 set path+=**
 set wildmenu
