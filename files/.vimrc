@@ -20,3 +20,9 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+set autoindent
+
+set wrap
+set linebreak
+
+set laststatus=2
