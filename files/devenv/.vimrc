@@ -23,3 +23,6 @@ set expandtab
 set autoindent
 
 set laststatus=2
+
+" last-position-jump
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif

@@ -1,5 +1,7 @@
 black==18.5b1
 Django==2.0.6
+feedparser==5.2.1
 flake8==3.5.0
+Markdown==2.6.11
 psycopg2==2.7.3.2
 pylint==1.9.1
