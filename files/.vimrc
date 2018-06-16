@@ -1,3 +1,4 @@
+
 set nocompatible
 syntax on
 filetype indent plugin on
@@ -22,7 +23,7 @@ set shiftround
 set expandtab
 set autoindent
 
-set wrap
-set linebreak
-
 set laststatus=2
+
+" last-position-jump
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
