@@ -2,7 +2,7 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y inotify-tools ctags vim
+RUN apt-get update && apt-get install -y inotify-tools ctags vim silversearcher-ag
 
 COPY ./ /root/
 RUN pip3 install -r /root/requirements.txt
