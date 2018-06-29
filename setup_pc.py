@@ -11,33 +11,25 @@ def run(command):
         print(command)
         subprocess.call(command, shell=True)
     except OSError as e:
-        print("{command} {e}".format(command=command, e=e))
+        print(f"{command} {e}"
 
 
 def setup_dot_ssh():
     print("Setup .ssh:")
-    home_dot_ssh = "{home_dir}/.ssh".format(home_dir=HOME_DIR)
-    work_dot_ssh_path = "{home_dir}/Desktop/work/dot.ssh".format(home_dir=HOME_DIR)
+    home_dot_ssh = f"{HOME_DIR}/.ssh"
+    work_dot_ssh_path = f"{HOME_DIR}/Desktop/work/dot.ssh"
 
     if os.path.isdir(home_dot_ssh):
-        print("{home_dot_ssh} already exists".format(home_dot_ssh=home_dot_ssh))
+        print(f"{home_dot_ssh} already exists")
     if not os.path.isdir(work_dot_ssh_path):
-        print(
-            "{work_dot_ssh_path} does not exist".format(
-                work_dot_ssh_path=work_dot_ssh_path
-            )
-        )
+        print(f"{work_dot_ssh_path} does not exist")
 
     if not os.path.isdir(home_dot_ssh) and os.path.isdir(work_dot_ssh_path):
-        run("mkdir {home_dot_ssh}".format(home_dot_ssh=home_dot_ssh))
-        run(
-            "cp -r {work_dot_ssh_path}/* {home_dot_ssh}".format(
-                work_dot_ssh_path=work_dot_ssh_path, home_dot_ssh=home_dot_ssh
-            )
-        )
+        run(f"mkdir {home_dot_ssh}")
+        run(f"cp -r {work_dot_ssh_path}/* {home_dot_ssh}")
 
-        run("chmod g-rx,o-rx {home_dir}/.ssh/github/id_rsa".format(home_dir=HOME_DIR))
-        run("chmod g-rx,o-rx {home_dir}/.ssh/id_rsa".format(home_dir=HOME_DIR))
+        run(f"chmod g-rx,o-rx {HOME_DIR}/.ssh/github/id_rsa")
+        run(f"chmod g-rx,o-rx {HOME_DIR}/.ssh/id_rsa")
 
 
 def apt_install():
@@ -64,60 +56,39 @@ def apt_install():
         "vlc",
         "zsh",
     ]
-    run("sudo apt install {packages}".format(packages=" ".join(APT_PACKAGES)))
+    run(f"sudo apt install {packages}")
 
 
 def add_home_configs():
     print("Add configuration files to home directory:")
     for filename in [".gitconfig", ".vimrc", ".zshrc", "fabfile.py"]:
-        link_path = "{home_dir}/{link}".format(home_dir=HOME_DIR, link=filename)
-        run("rm {link_path}".format(link_path=link_path))
-        run(
-            "ln -s {curr_dir}/files/{filename} {link_path}".format(
-                curr_dir=CURR_DIR, filename=filename, link_path=link_path
-            )
-        )
-    run("rm {home_dir}/.zsh_history".format(home_dir=HOME_DIR))
-    run(
-        "cp {curr_dir}/files/.zsh_history {home_dir}/.zsh_history".format(
-            curr_dir=CURR_DIR, home_dir=HOME_DIR
-        )
-    )
+        link_path = f"{HOME_DIR}/{filename}"
+        run(f"rm {link_path}")
+        run(f"ln -s {CURR_DIR}/files/{filename} {link_path}")
+    run(f"rm {HOME_DIR}/.zsh_history")
+    run(f"cp {CURR_DIR}/files/.zsh_history {HOME_DIR}/.zsh_history")
 
 
 def setup_vim():
     print("Setup vim:")
-    run("rm {home_dir}/.vim/colors".format(home_dir=HOME_DIR))
-    run(
-        "ln -s {curr_dir}/files/.vim/colors {home_dir}/.vim/colors".format(
-            curr_dir=CURR_DIR, home_dir=HOME_DIR
-        )
-    )
+    run(f"rm {HOME_DIR}/.vim/colors")
+    run(f"ln -s {CURR_DIR}/files/.vim/colors {HOME_DIR}/.vim/colors")
 
 
 def setup_byobu():
     print("Setup byobu")
     run("byobu-select-backend screen")
-    run(
-        "cp {curr_dir}/files/byobu.desktop "
-        "{home_dir}/.local/share/applications/byobu.desktop".format(
-            curr_dir=CURR_DIR, home_dir=HOME_DIR
-        )
-    )
+    run(f"cp {CURR_DIR}/files/byobu.desktop {HOME_DIR}/.local/share/applications/byobu.desktop")
 
 
 def setup_vcprompt():
     print("Setup vcprompt:")
-    run(
-        "sudo ln -s {curr_dir}/files/vcprompt /usr/local/bin/vcprompt".format(
-            curr_dir=CURR_DIR
-        )
-    )
+    run(f"sudo ln -s {CURR_DIR}/files/vcprompt /usr/local/bin/vcprompt")
 
 
 def setup_etc_hosts():
     print("Setup /etc/hosts:")
-    run("sudo cp {curr_dir}/files/hosts /etc/hosts".format(curr_dir=CURR_DIR))
+    run(f"sudo cp {CURR_DIR}/files/hosts /etc/hosts")
     run("sudo chmod u=rw,g=r,o=r /etc/hosts")
 
 
@@ -143,32 +114,11 @@ def install_atom_ide():
 
 def setup_devenv():
     print("Setup development environment:")
-    run(
-        "ln -s {curr_dir}/files/devenv/docker-compose.yml "
-        "{parent_dir}/docker-compose.yml".format(
-            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
-        )
-    )
-    run(
-        "ln -s {curr_dir}/files/devenv/.pylintrc {parent_dir}/.pylintrc".format(
-            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
-        )
-    )
-    run(
-        "ln -s {curr_dir}/files/devenv/setup.cfg {parent_dir}/setup.cfg".format(
-            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
-        )
-    )
-    run(
-        "ln -s {curr_dir}/files/devenv {parent_dir}/devenv".format(
-            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
-        )
-    )
-    run(
-        "ln -s {curr_dir}/files/devenv/setup_app.py {parent_dir}/setup_app.py".format(
-            curr_dir=CURR_DIR, parent_dir=PARENT_DIR
-        )
-    )
+    run(f"ln -s {CURR_DIR}/files/devenv/docker-compose.yml {PARENT_DIR}/docker-compose.yml")
+    run(f"ln -s {CURR_DIR}/files/devenv/.pylintrc {PARENT_DIR}/.pylintrc")
+    run(f"ln -s {CURR_DIR}/files/devenv/setup.cfg {PARENT_DIR}/setup.cfg")
+    run(f"ln -s {CURR_DIR}/files/devenv {PARENT_DIR}/devenv")
+    run(f"ln -s {CURR_DIR}/files/devenv/setup_app.py {PARENT_DIR}/setup_app.py")
 
 
 def main():
