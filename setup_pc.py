@@ -11,7 +11,7 @@ def run(command):
         print(command)
         subprocess.call(command, shell=True)
     except OSError as e:
-        print(f"{command} {e}"
+        print(f"{command} {e}")
 
 
 def setup_dot_ssh():
@@ -56,7 +56,7 @@ def apt_install():
         "vlc",
         "zsh",
     ]
-    run(f"sudo apt install {packages}")
+    run(f"sudo apt install {APT_PACKAGES}")
 
 
 def add_home_configs():
@@ -78,7 +78,9 @@ def setup_vim():
 def setup_byobu():
     print("Setup byobu")
     run("byobu-select-backend screen")
-    run(f"cp {CURR_DIR}/files/byobu.desktop {HOME_DIR}/.local/share/applications/byobu.desktop")
+    run(
+        f"cp {CURR_DIR}/files/byobu.desktop {HOME_DIR}/.local/share/applications/byobu.desktop"
+    )
 
 
 def setup_vcprompt():
@@ -114,7 +116,9 @@ def install_atom_ide():
 
 def setup_devenv():
     print("Setup development environment:")
-    run(f"ln -s {CURR_DIR}/files/devenv/docker-compose.yml {PARENT_DIR}/docker-compose.yml")
+    run(
+        f"ln -s {CURR_DIR}/files/devenv/docker-compose.yml {PARENT_DIR}/docker-compose.yml"
+    )
     run(f"ln -s {CURR_DIR}/files/devenv/.pylintrc {PARENT_DIR}/.pylintrc")
     run(f"ln -s {CURR_DIR}/files/devenv/setup.cfg {PARENT_DIR}/setup.cfg")
     run(f"ln -s {CURR_DIR}/files/devenv {PARENT_DIR}/devenv")
