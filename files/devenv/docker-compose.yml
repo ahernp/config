@@ -33,14 +33,14 @@ services:
             - webapp
         ports:
             - "80:80"
-#    tools:
-#        image: node:9
-#        working_dir: /tools
-#        command: bash -c "npm install && npm start"
-#        volumes:
-#            - ./ahernp.com/tools/toolsjs:/tools
-#        ports:
-#            - "3000:3000"
+    node:
+        image: node:9
+        working_dir: /node
+        command: bash -c "npm install && npm start"
+        volumes:
+            - ./ahernp.com/mpages/mpagesjs:/node
+        ports:
+            - "3000:3000"
     webapp:
         build:
             context: ./ahernp.com
