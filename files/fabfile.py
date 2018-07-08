@@ -29,6 +29,12 @@ def backup():
     local(
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
+
+    # Backup dmcm contents
+    with lcd("/home/%s/code/dmcm" % (current_userid)):
+        local("docker-compose run --rm webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json")
+    rsync("~/code/dmcm/media", "~/Desktop/work/dmcm/media")
+
     for disk in ["KINGSTON", "hp"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             rsync("~/Documents", '"/media/%s/%s/Documents"' % (current_userid, disk))
