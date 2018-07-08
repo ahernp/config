@@ -32,7 +32,9 @@ def backup():
 
     # Backup dmcm contents
     with lcd("/home/%s/code/dmcm" % (current_userid)):
-        local("docker-compose run --rm webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json")
+        local(
+            "docker-compose run --rm webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json"
+        )
     rsync("~/code/dmcm/media", "~/Desktop/work/dmcm/media")
 
     for disk in ["KINGSTON", "hp"]:
