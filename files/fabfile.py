@@ -23,16 +23,12 @@ def rsync(source, dest):
 
 
 @task
-@hosts('localhost')
+@hosts("localhost")
 def backup_dmcm():
     """ Backup text and files from dmcm """
     with lcd("/home/%s/code/dmcm" % (current_userid)):
-        local(
-            "docker-compose exec webapp python manage.py delete_logs"
-        )
-        local(
-            "docker-compose exec webapp python manage.py delete_page_reads"
-        )
+        local("docker-compose exec webapp python manage.py delete_logs")
+        local("docker-compose exec webapp python manage.py delete_page_reads")
         local(
             "docker-compose exec webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json"
         )
@@ -41,15 +37,13 @@ def backup_dmcm():
 
 
 @task
-@hosts('localhost')
+@hosts("localhost")
 def restore_dmcm():
     """ Restore text and files in dmcm from backup """
     rsync("~/Desktop/work/dmcm/media", "~/code/dmcm/media")
     local("cp ~/Desktop/work/dmcm/snapshot.json ~/code/dmcm/snapshot.json")
     with lcd("/home/%s/code/dmcm" % (current_userid)):
-        local(
-            "docker-compose exec webapp python manage.py loaddata snapshot.json"
-        )
+        local("docker-compose exec webapp python manage.py loaddata snapshot.json")
     local("rm ~/code/dmcm/snapshot.json")
 
 

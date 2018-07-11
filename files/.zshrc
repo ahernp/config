@@ -19,8 +19,10 @@ alias de='cd ~/code;docker-compose'
 alias doc='de up'
 alias sql='de exec db psql -U postgres ahernp'
 alias app='de exec webapp bash'
-alias dev='de exec devenv bash'
+alias dev='de run --rm devenv bash'
 alias dm='cd ~/code/dmcm;docker-compose up -d'
+alias dmb="cd ~;fab backup_dmcm;cd -"
+alias dmr="cd ~;fab restore_dmcm;cd -"
 
 grep "alias " ~/.zshrc
 
