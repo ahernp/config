@@ -28,8 +28,15 @@ def backup_dmcm():
     """ Backup text and files from dmcm """
     with lcd("/home/%s/code/dmcm" % (current_userid)):
         local(
+            "docker-compose exec webapp python manage.py delete_logs"
+        )
+        local(
+            "docker-compose exec webapp python manage.py delete_page_reads"
+        )
+        local(
             "docker-compose exec webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json"
         )
+    local("sudo chown {user}:{user} -R ~/code/dmcm".format(user=current_userid))
     rsync("~/code/dmcm/media", "~/Desktop/work/dmcm/media")
 
 
@@ -42,7 +49,7 @@ def restore_dmcm():
     with lcd("/home/%s/code/dmcm" % (current_userid)):
         local(
             "docker-compose exec webapp python manage.py loaddata snapshot.json"
-	)
+        )
     local("rm ~/code/dmcm/snapshot.json")
 
 
