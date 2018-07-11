@@ -13,6 +13,9 @@ set t_Co=256
 color wombat256mod
 set background=dark
 
+highlight RedundantSpaces ctermbg=red guibg=red
+match RedundantSpaces /\s\+$/
+
 set hlsearch
 
 set tabstop=4
