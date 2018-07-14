@@ -11,15 +11,19 @@ PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt)%{$res
 
 export EDITOR="vi"
 alias ls='ls -Fh --color=auto'
-alias test='fab test'
 alias backup='cd ~;fab backup;cd -'
 alias vi='vi -p'
+
+alias cr="cd ~;fab check_git_status;cd -"
 alias port='docker run --name portainer --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer'
+
+# Development environment
 alias de='cd ~/code;docker-compose'
 alias doc='de up'
 alias sql='de exec db psql -U postgres ahernp'
-alias app='de exec webapp bash'
 alias dev='de run --rm devenv bash'
+
+# dmcm
 alias dm='cd ~/code/dmcm;docker-compose up -d'
 alias dmb="cd ~;fab backup_dmcm;cd -"
 alias dmr="cd ~;fab restore_dmcm;cd -"

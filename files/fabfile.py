@@ -102,7 +102,7 @@ def full_backup():
 @hosts("localhost")
 def check_git_status():
     """Check status of all local repositories."""
-    REPOSITORIES = ["ahernp", "config"]
+    REPOSITORIES = ["ahernp.com", "config", "dmcm"]
     for repository in REPOSITORIES:
         with lcd("/home/%s/code/%s" % (current_userid, repository)):
             local("pwd")
