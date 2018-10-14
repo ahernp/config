@@ -1,10 +1,8 @@
-"""
-Simple Backup.
-"""
 import getpass
 import os
 from fabric.api import task, hosts, local, env
 from fabric.context_managers import lcd
+from fabric.contrib.console import confirm
 
 current_userid = getpass.getuser()
 
@@ -40,11 +38,12 @@ def backup_dmcm():
 @hosts("localhost")
 def restore_dmcm():
     """ Restore text and files in dmcm from backup """
-    rsync("~/Desktop/work/dmcm/media", "~/code/dmcm/media")
-    local("cp ~/Desktop/work/dmcm/snapshot.json ~/code/dmcm/snapshot.json")
-    with lcd("/home/%s/code/dmcm" % (current_userid)):
-        local("docker-compose exec webapp python manage.py loaddata snapshot.json")
-    local("rm ~/code/dmcm/snapshot.json")
+    if confirm("Replace current dmcm contents?", default=False):
+       rsync("~/Desktop/work/dmcm/media", "~/code/dmcm/media")
+       local("cp ~/Desktop/work/dmcm/snapshot.json ~/code/dmcm/snapshot.json")
+       with lcd("/home/%s/code/dmcm" % (current_userid)):
+           local("docker-compose exec webapp python manage.py loaddata snapshot.json")
+       local("rm ~/code/dmcm/snapshot.json")
 
 
 @task
@@ -55,7 +54,7 @@ def backup():
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
 
-    for disk in ["KINGSTON", "hp"]:
+    for disk in ["Kingston", "hp"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             rsync("~/Documents", '"/media/%s/%s/Documents"' % (current_userid, disk))
             rsync("~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk))
@@ -67,35 +66,6 @@ def backup():
     # Restore permissions on private keys
     local("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
     local("chmod o-rx,g-rx ~/.ssh/id_rsa")
-
-
-@task
-@hosts("localhost")
-def full_backup():
-    """Backup local directories."""
-
-    def backup(directory):
-        source = "/home/%s/%s/" % (current_userid, directory)
-        for disk in ["KINGSTON", "Iomega HDD"]:
-            if os.path.exists(
-                "/media/%s/%s/archive/Desktop/work" % (current_userid, disk)
-            ):
-                dest = "/media/%s/%s/archive/%s" % (current_userid, disk, directory)
-                print(
-                    "# Backing up newer versions of files in %s to %s" % (source, dest)
-                )
-                local(
-                    'rsync -auvp --stats --modify-window=1 --delete "%s" "%s"'
-                    % (source, dest)
-                )
-                break
-
-    backup("Desktop/work")
-    backup("Documents")
-    backup("ebooks")
-    backup("Music")
-    backup("Pictures")
-    backup("Spoken")
 
 
 @task
