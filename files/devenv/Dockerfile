@@ -1,8 +1,8 @@
-FROM python:3.7.0b5
+FROM ubuntu:18.04
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y inotify-tools ctags vim silversearcher-ag
+RUN apt-get update && apt-get install -y python3 python3-pip ctags vim silversearcher-ag
 
 COPY ./ /root/
 RUN pip3 install -r /root/requirements.txt

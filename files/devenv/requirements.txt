@@ -1,5 +1,5 @@
 black==18.5b1
-Django==2.1.5
+Django==2.2
 feedparser==5.2.1
 flake8==3.5.0
 Markdown==2.6.11

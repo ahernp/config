@@ -24,7 +24,7 @@ alias sql='de exec db psql -U postgres ahernp'
 alias dev='de run --rm devenv bash'
 
 # dmcm
-alias dm='cd ~/code/dmcm;docker-compose up -d'
+alias dm='cd ~/code/dmcm;docker-compose up -d;sudo apt update && sudo apt upgrade -y'
 alias dmb="cd ~;fab backup_dmcm;cd -"
 alias dmr="cd ~;fab restore_dmcm;cd -"
 

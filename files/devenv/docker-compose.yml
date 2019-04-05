@@ -8,7 +8,7 @@ services:
     devenv:
         build:
             context: ./devenv
-        image: python3:devenv
+        image: ubuntu1804:devenv
         environment:
             - AHERNP_DATABASE_USER
             - AHERNP_DATABASE_PASSWORD
