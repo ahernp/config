@@ -4,4 +4,3 @@ feedparser==5.2.1
 flake8==3.5.0
 Markdown==2.6.11
 psycopg2-binary==2.7.5
-pylint==1.9.1
