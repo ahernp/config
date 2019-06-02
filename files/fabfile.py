@@ -28,7 +28,7 @@ def backup_dmcm():
         local("docker-compose exec webapp python manage.py delete_logs")
         local("docker-compose exec webapp python manage.py delete_page_reads")
         local(
-            "docker-compose exec webapp python manage.py dumpdata --indent 4 core mpages timers > ~/Desktop/work/dmcm/snapshot.json"
+            "docker-compose exec webapp python manage.py dumpdata --indent 4 core pages timers > ~/Desktop/work/dmcm/snapshot.json"
         )
     local("sudo chown {user}:{user} -R ~/code/dmcm".format(user=current_userid))
     rsync("~/code/dmcm/media", "~/Desktop/work/dmcm/media")
