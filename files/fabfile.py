@@ -22,36 +22,10 @@ def rsync(source, dest):
 
 @task
 @hosts("localhost")
-def backup_dmcm():
-    """ Backup text and files from dmcm """
-    with lcd("/home/%s/code/dmcm" % (current_userid)):
-        local("docker-compose exec webapp python manage.py delete_logs")
-        local("docker-compose exec webapp python manage.py delete_page_reads")
-        local(
-            "docker-compose exec webapp python manage.py dumpdata --indent 4 core pages timers > ~/Desktop/work/dmcm/snapshot.json"
-        )
-    local("sudo chown {user}:{user} -R ~/code/dmcm".format(user=current_userid))
-    rsync("~/code/dmcm/media", "~/Desktop/work/dmcm/media")
-
-
-@task
-@hosts("localhost")
-def restore_dmcm():
-    """ Restore text and files in dmcm from backup """
-    if confirm("Replace current dmcm contents?", default=False):
-        rsync("~/Desktop/work/dmcm/media", "~/code/dmcm/media")
-        local("cp ~/Desktop/work/dmcm/snapshot.json ~/code/dmcm/snapshot.json")
-        with lcd("/home/%s/code/dmcm" % (current_userid)):
-            local("docker-compose exec webapp python manage.py loaddata snapshot.json")
-            local("docker-compose exec webapp python manage.py delete_logs")
-            local("docker-compose exec webapp python manage.py delete_page_reads")
-        local("rm ~/code/dmcm/snapshot.json")
-
-
-@task
-@hosts("localhost")
 def backup():
     """Simple backup of local directories to USB drive."""
+    rsync("~/code/gmcm/data", "~/Desktop/work/gmcm/data")
+    rsync("~/code/gmcm/media", "~/Desktop/work/gmcm/media")
     local(
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
@@ -74,7 +48,7 @@ def backup():
 @hosts("localhost")
 def check_git_status():
     """Check status of all local repositories."""
-    REPOSITORIES = ["ahernp.com", "config", "dmcm"]
+    REPOSITORIES = ["ahernp.com", "config", "gmcm"]
     for repository in REPOSITORIES:
         with lcd("/home/%s/code/%s" % (current_userid, repository)):
             local("pwd")

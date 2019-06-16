@@ -14,19 +14,14 @@ alias ls='ls -Fh --color=auto'
 alias backup='cd ~;fab backup;cd -'
 alias vi='vi -p'
 
+alias up='sudo apt update && sudo apt upgrade -y'
 alias cr="cd ~;fab check_git_status;cd -"
-alias port='docker run --name portainer --restart=always -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer'
 
 # Development environment
 alias de='cd ~/code;docker-compose'
 alias doc='de up'
 alias sql='de exec db psql -U postgres ahernp'
 alias dev='de run --rm devenv bash'
-
-# dmcm
-alias dm='cd ~/code/dmcm;docker-compose up -d;sudo apt update && sudo apt upgrade -y'
-alias dmb="cd ~;fab backup_dmcm;cd -"
-alias dmr="cd ~;fab restore_dmcm;cd -"
 
 grep "alias " ~/.zshrc
 
@@ -56,3 +51,7 @@ bindkey "^[3;5~" delete-char
 
 # Activate zshrc syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export GOPATH="/home/ahernp/code/go"
+export GOBIN="/home/ahernp/code/go/bin"
+export PATH="$PATH:/home/ahernp/code/go/bin"

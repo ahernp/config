@@ -47,6 +47,7 @@ def apt_install():
         "gnucash",
         "htop",
         "hunspell-en-gb",
+        "rename",
         "screen",
         "silversearcher-ag",
         "speedcrunch",
