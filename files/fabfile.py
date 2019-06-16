@@ -12,7 +12,8 @@ env.user = current_userid
 
 def rsync(source, dest):
     """Copy files from source to destination.."""
-    command = "rsync -auvp --exclude '*.pyc' --stats --modify-window=1 %s/ %s" % (
+    source += "/"
+    command = "rsync -auv --exclude '*.pyc' --stats --modify-window=1 %s %s" % (
         source,
         dest,
     )
