@@ -44,6 +44,9 @@ def backup():
     local("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
     local("chmod o-rx,g-rx ~/.ssh/id_rsa")
 
+    rsync("~/Desktop/work/gmcm/data", "~/code/gmcm/data")
+    rsync("~/Desktop/work/gmcm/media", "~/code/gmcm/media")
+
 
 @task
 @hosts("localhost")

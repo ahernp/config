@@ -46,7 +46,7 @@ services:
         working_dir: /node
         command: bash -c "npm install && npm start"
         volumes:
-            - ./ahernp.com/pages/pagesjs:/node
+            - ./ahernp.com/tools/toolsjs:/node
         ports:
             - "3000:3000"
     webapp:
