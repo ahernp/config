@@ -1,3 +1,5 @@
+from datetime import datetime
+from pytz import timezone
 import getpass
 import os
 from fabric.api import task, hosts, local, env
@@ -57,3 +59,21 @@ def check_git_status():
         with lcd("/home/%s/code/%s" % (current_userid, repository)):
             local("pwd")
             local("git status")
+
+
+@task
+@hosts("localhost")
+def times():
+    """Show current time in various timezones"""
+    TIMEZONES = [
+        "America/Los_Angeles",
+        "America/New_York",
+        "Europe/London",
+        "Asia/Singapore",
+        "Australia/Sydney",
+    ]
+
+    for tz_str in TIMEZONES:
+        tz = timezone(tz_str)
+        time = datetime.now(tz)
+        print("%s (%s)" % (time.strftime('%Y-%m-%d %H:%M:%S'), tz_str))

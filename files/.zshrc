@@ -14,6 +14,7 @@ alias ls='ls -Fh --color=auto'
 alias backup='cd ~;fab backup;cd -'
 alias vi='vi -p'
 
+alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'
 alias cr="cd ~;fab check_git_status;cd -"
 
