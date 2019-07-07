@@ -27,8 +27,8 @@ def rsync(source, dest):
 @hosts("localhost")
 def backup():
     """Simple backup of local directories to USB drive."""
-    rsync("~/code/gmcm/data", "~/Desktop/work/gmcm/data")
-    rsync("~/code/gmcm/media", "~/Desktop/work/gmcm/media")
+    rsync("~/code/pmcm/data", "~/Desktop/work/pmcm/data")
+    rsync("~/code/pmcm/media", "~/Desktop/work/pmcm/media")
     local(
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
@@ -46,15 +46,24 @@ def backup():
     local("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
     local("chmod o-rx,g-rx ~/.ssh/id_rsa")
 
-    rsync("~/Desktop/work/gmcm/data", "~/code/gmcm/data")
-    rsync("~/Desktop/work/gmcm/media", "~/code/gmcm/media")
+    rsync("~/Desktop/work/pmcm/data", "~/code/pmcm/data")
+    rsync("~/Desktop/work/pmcm/media", "~/code/pmcm/media")
+
+
+@task
+@hosts("localhost")
+def full_backup():
+    """Backup of more directories to USB drive."""
+    rsync("~/Desktop/work", '"/media/ahernp/Iomega\ HDD/archive/work/affectv"')
+    for directory in ["Documents", "ebooks", "Music", "Pictures", "Spoken"]:
+        rsync("~/%s" % directory, "/media/ahernp/Iomega\ HDD/archive/%s" % directory)
 
 
 @task
 @hosts("localhost")
 def check_git_status():
     """Check status of all local repositories."""
-    REPOSITORIES = ["ahernp.com", "config", "gmcm"]
+    REPOSITORIES = ["ahernp.com", "config", "pmcm"]
     for repository in REPOSITORIES:
         with lcd("/home/%s/code/%s" % (current_userid, repository)):
             local("pwd")
