@@ -47,6 +47,7 @@ def apt_install():
         "gnucash",
         "htop",
         "hunspell-en-gb",
+        "python3-pip",
         "rename",
         "screen",
         "silversearcher-ag",
@@ -57,7 +58,7 @@ def apt_install():
         "vlc",
         "zsh",
     ]
-    run(f"sudo apt install {APT_PACKAGES}")
+    run(f"sudo apt install {' '.join(APT_PACKAGES)}")
 
 
 def add_home_configs():
