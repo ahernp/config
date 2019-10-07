@@ -47,6 +47,7 @@ def apt_install():
         "gnucash",
         "htop",
         "hunspell-en-gb",
+        "python-pip",
         "python3-pip",
         "rename",
         "screen",
