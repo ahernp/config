@@ -3,6 +3,7 @@ from pytz import timezone
 import getpass
 import os
 from fabric.api import task, hosts, local, env
+from fabric.colors import yellow
 from fabric.context_managers import lcd
 from fabric.contrib.console import confirm
 
@@ -33,14 +34,19 @@ def backup():
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
 
+    disk_found = False
     for disk in ["Kingston", "hp"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
+            disk_found = True
             rsync("~/Documents", '"/media/%s/%s/Documents"' % (current_userid, disk))
             rsync("~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk))
             rsync(
                 '"/media/%s/%s/work"' % (current_userid, disk), "~/Desktop/work"
             )  # Copy changes from disk
             break
+    if not disk_found:
+        print(yellow("Error no disk found for backup"))
+        return
 
     # Restore permissions on private keys
     local("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
