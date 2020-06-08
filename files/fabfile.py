@@ -2,15 +2,21 @@ from datetime import datetime
 from pytz import timezone
 import getpass
 import os
-from fabric.api import task, hosts, local, env
-from fabric.colors import yellow
-from fabric.context_managers import lcd
-from fabric.contrib.console import confirm
+from fabric import Connection, task
 
 current_userid = getpass.getuser()
 
-env.hosts = ["web"]
-env.user = current_userid
+local = Connection("localhost")
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 
 def rsync(source, dest):
@@ -21,16 +27,15 @@ def rsync(source, dest):
         dest,
     )
     print("Running '%s'" % (command))
-    local(command)
+    local.run(command)
 
 
 @task
-@hosts("localhost")
-def backup():
+def backup(local):
     """Simple backup of local directories to USB drive."""
     rsync("~/code/pmcm/data", "~/Desktop/work/pmcm/data")
     rsync("~/code/pmcm/media", "~/Desktop/work/pmcm/media")
-    local(
+    local.run(
         "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
 
@@ -45,20 +50,19 @@ def backup():
             )  # Copy changes from disk
             break
     if not disk_found:
-        print(yellow("Error no disk found for backup"))
+        print(f"{bcolors.WARNING}Error no disk found for backup{bcolors.ENDC}")
         return
 
     # Restore permissions on private keys
-    local("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
-    local("chmod o-rx,g-rx ~/.ssh/id_rsa")
+    local.run("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
+    local.run("chmod o-rx,g-rx ~/.ssh/id_rsa")
 
     rsync("~/Desktop/work/pmcm/data", "~/code/pmcm/data")
     rsync("~/Desktop/work/pmcm/media", "~/code/pmcm/media")
 
 
 @task
-@hosts("localhost")
-def full_backup():
+def full_backup(local):
     """Backup of more directories to USB drive."""
     rsync("~/Desktop/work", '"/media/ahernp/Iomega\ HDD/archive/work/affectv"')
     for directory in ["Documents", "ebooks", "Music", "Pictures", "Spoken"]:
@@ -66,19 +70,7 @@ def full_backup():
 
 
 @task
-@hosts("localhost")
-def check_git_status():
-    """Check status of all local repositories."""
-    REPOSITORIES = ["ahernp.com", "config", "pmcm"]
-    for repository in REPOSITORIES:
-        with lcd("/home/%s/code/%s" % (current_userid, repository)):
-            local("pwd")
-            local("git status")
-
-
-@task
-@hosts("localhost")
-def times():
+def times(local):
     """Show current time in various timezones"""
     TIMEZONES = [
         "America/Los_Angeles",
