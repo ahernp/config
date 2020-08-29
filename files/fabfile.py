@@ -8,6 +8,7 @@ current_userid = getpass.getuser()
 
 local = Connection("localhost")
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -65,7 +66,7 @@ def backup(local):
 def full_backup(local):
     """Backup of more directories to USB drive."""
     rsync("~/Desktop/work", '"/media/ahernp/Iomega\ HDD/archive/work/affectv"')
-    for directory in ["Documents", "ebooks", "Music", "Pictures", "Spoken"]:
+    for directory in ["Documents", "ebooks", "Music", "Pictures"]:
         rsync("~/%s" % directory, "/media/ahernp/Iomega\ HDD/archive/%s" % directory)
 
 

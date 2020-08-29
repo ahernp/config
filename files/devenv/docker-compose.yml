@@ -33,22 +33,6 @@ services:
             - webapp
         ports:
             - "80:80"
-    golang:
-        image: golang:1.12
-        environment:
-            GO111MODULE: "on"
-        volumes:
-            - ./go:/go
-        ports:
-            - "8080:8080"
-    node:
-        image: node:9
-        working_dir: /node
-        command: bash -c "npm install && npm start"
-        volumes:
-            - ./ahernp.com/tools/toolsjs:/node
-        ports:
-            - "3000:3000"
     webapp:
         build:
             context: ./ahernp.com
