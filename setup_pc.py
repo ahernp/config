@@ -127,6 +127,10 @@ def setup_devenv():
     run(f"ln -s {CURR_DIR}/files/devenv/setup_app.py {PARENT_DIR}/setup_app.py")
 
 
+def enable_firewall():
+    run("sudo ufw enable")
+
+
 def main():
     setup_dot_ssh()
     proceed = input("Check ~/.ssh has been setup. Proceed (y/n): ")
@@ -140,6 +144,7 @@ def main():
         change_shell_to_zsh()
         install_atom_ide()
         setup_devenv()
+        enable_firewall()
 
 
 if __name__ == "__main__":
