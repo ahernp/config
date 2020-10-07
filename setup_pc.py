@@ -73,8 +73,8 @@ def add_home_configs():
 
 def setup_vim():
     print("Setup vim:")
-    run(f"rm {HOME_DIR}/.vim/colors")
-    run(f"ln -s {CURR_DIR}/files/.vim/colors {HOME_DIR}/.vim/colors")
+    run(f"mkdir -p {HOME_DIR}/.vim/colors")
+    run(f"ln -s {HOME_DIR}/Desktop/work/pmcm/media/code/wombat256mod.vim {HOME_DIR}/.vim/colors/wombat256mod.vim")
 
 
 def setup_byobu():
