@@ -1,6 +1,6 @@
 [user]
-    name = Paul Ahern
-    email = ahernp@ahernp.com
+	name = Paul Ahern
+	email = ahernp@ahernp.com
 [merge]
     tool = vimdiff
 [core]

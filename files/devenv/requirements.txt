@@ -1,6 +1,6 @@
-black==18.5b1
+black
 Django
-feedparser==5.2.1
-flake8==3.5.0
-Markdown==2.6.11
-psycopg2-binary==2.7.5
+feedparser
+flake8
+Markdown
+psycopg2-binary

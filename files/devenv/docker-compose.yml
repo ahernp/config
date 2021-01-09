@@ -8,7 +8,7 @@ services:
     devenv:
         build:
             context: ./devenv
-        image: ubuntu1804:devenv
+        image: ubuntu2004:devenv
         environment:
             - AHERNP_DATABASE_USER
             - AHERNP_DATABASE_PASSWORD

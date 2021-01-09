@@ -3,21 +3,11 @@ from pytz import timezone
 import getpass
 import os
 from fabric import Connection, task
+from rich import print
 
 current_userid = getpass.getuser()
 
 local = Connection("localhost")
-
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 
 def rsync(source, dest):
@@ -51,7 +41,7 @@ def backup(local):
             )  # Copy changes from disk
             break
     if not disk_found:
-        print(f"{bcolors.WARNING}Error no disk found for backup{bcolors.ENDC}")
+        print("[blink yellow]Error no disk found for backup[/blink yellow]")
         return
 
     # Restore permissions on private keys
@@ -65,7 +55,7 @@ def backup(local):
 @task
 def full_backup(local):
     """Backup of more directories to USB drive."""
-    rsync("~/Desktop/work", '"/media/ahernp/Iomega\ HDD/archive/work/affectv"')
+    rsync("~/Desktop/work", "/media/ahernp/Iomega\ HDD/archive/work/affectv")
     for directory in ["Documents", "ebooks", "Music", "Pictures"]:
         rsync("~/%s" % directory, "/media/ahernp/Iomega\ HDD/archive/%s" % directory)
 
