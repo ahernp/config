@@ -23,6 +23,7 @@ alias de='cd ~/code;docker-compose'
 alias doc='de up'
 alias sql='de exec db psql -U postgres ahernp'
 alias dev='de run --rm devenv bash'
+alias cal='ncal -byM'
 
 grep "alias " ~/.zshrc
 
