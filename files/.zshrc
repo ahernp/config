@@ -57,3 +57,5 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export GOPATH="/home/ahernp/code/go"
 export GOBIN="/home/ahernp/code/go/bin"
 export PATH="$PATH:/home/ahernp/.local/bin"
+
+fab numbers-of-days

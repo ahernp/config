@@ -75,3 +75,16 @@ def times(local):
         tz = timezone(tz_str)
         time = datetime.now(tz)
         print("%s (%s)" % (time.strftime('%Y-%m-%d %H:%M:%S'), tz_str))
+
+@task
+def numbers_of_days(local):
+    """Numbers of days since and to various dates"""
+    now = datetime.now()
+    print(f'Today is {now.strftime("%a, %d %b %Y")}:')
+    for target, label in [
+        ("2020-01-31", "since Brexit"),
+        ("2021-12-25", "to Christmas"),
+    ]:
+        target_date = datetime.strptime(target, "%Y-%m-%d")
+        number_of_days = (now - target_date).days if now > target_date else (target_date - now).days
+        print(f"    {number_of_days:,} days {label}")
