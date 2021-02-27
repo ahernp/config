@@ -74,7 +74,8 @@ def times(local):
     for tz_str in TIMEZONES:
         tz = timezone(tz_str)
         time = datetime.now(tz)
-        print("%s (%s)" % (time.strftime('%Y-%m-%d %H:%M:%S'), tz_str))
+        print("%s (%s)" % (time.strftime("%Y-%m-%d %H:%M:%S"), tz_str))
+
 
 @task
 def numbers_of_days(local):
@@ -86,5 +87,5 @@ def numbers_of_days(local):
         ("2021-12-25", "to Christmas"),
     ]:
         target_date = datetime.strptime(target, "%Y-%m-%d")
-        number_of_days = (now - target_date).days if now > target_date else (target_date - now).days
+        number_of_days = abs((now - target_date).days)
         print(f"    {number_of_days:,} days {label}")
