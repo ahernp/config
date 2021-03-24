@@ -8,5 +8,5 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-# Webfaction
-5.153.9.53 web
+# Digital Ocean
+178.62.99.101 do
