@@ -105,17 +105,6 @@ def change_shell_to_zsh():
     run("sudo mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting")
 
 
-def install_atom_ide():
-    print("Install atom IDE:")
-    run("curl -L https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -")
-    run(
-        'sudo sh -c \'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" '
-        "> /etc/apt/sources.list.d/atom.list'"
-    )
-    run("sudo apt update")
-    run("sudo apt install atom")
-
-
 def setup_devenv():
     print("Setup development environment:")
     run(
@@ -142,7 +131,6 @@ def main():
         setup_vcprompt()
         setup_etc_hosts()
         change_shell_to_zsh()
-        install_atom_ide()
         setup_devenv()
         enable_firewall()
 
