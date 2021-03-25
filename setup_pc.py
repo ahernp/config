@@ -45,6 +45,7 @@ def apt_install():
         "geany-plugins",
         "git",
         "gnucash",
+        "gnome-tweak-tool",
         "htop",
         "hunspell-en-gb",
         "python3-pip",
@@ -74,7 +75,9 @@ def add_home_configs():
 def setup_vim():
     print("Setup vim:")
     run(f"mkdir -p {HOME_DIR}/.vim/colors")
-    run(f"ln -s {HOME_DIR}/Desktop/work/pmcm/media/code/wombat256mod.vim {HOME_DIR}/.vim/colors/wombat256mod.vim")
+    run(
+        f"ln -s {HOME_DIR}/Desktop/work/pmcm/media/code/wombat256mod.vim {HOME_DIR}/.vim/colors/wombat256mod.vim"
+    )
 
 
 def setup_byobu():
@@ -117,12 +120,23 @@ def setup_devenv():
 
 
 def enable_firewall():
+    print("Enable Firewall:")
     run("sudo ufw enable")
+
+
+def pip_install():
+    print("Install pip packages:")
+    run("pip3 install decorator Glances httpie ipython Markdown rich")
+
+
+def remove_home_from_desktop():
+    print("Remove home folder from Desktop:")
+    run("gsettings set org.gnome.shell.extensions.desktop-icons show-home false")
 
 
 def main():
     setup_dot_ssh()
-    proceed = input("Check ~/.ssh has been setup. Proceed (y/n): ")
+    proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
     if proceed == "y":
         apt_install()
         add_home_configs()
@@ -133,6 +147,8 @@ def main():
         change_shell_to_zsh()
         setup_devenv()
         enable_firewall()
+        pip_install()
+        remove_home_from_desktop()
 
 
 if __name__ == "__main__":
