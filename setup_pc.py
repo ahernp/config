@@ -64,20 +64,12 @@ def apt_install():
 
 def add_home_configs():
     print("Add configuration files to home directory:")
-    for filename in [".gitconfig", ".vimrc", ".zshrc", "fabfile.py"]:
+    for filename in [".gitconfig", ".vimrc", ".vim", ".zshrc", "fabfile.py"]:
         link_path = f"{HOME_DIR}/{filename}"
         run(f"rm {link_path}")
         run(f"ln -s {CURR_DIR}/files/{filename} {link_path}")
     run(f"rm {HOME_DIR}/.zsh_history")
     run(f"cp {CURR_DIR}/files/.zsh_history {HOME_DIR}/.zsh_history")
-
-
-def setup_vim():
-    print("Setup vim:")
-    run(f"mkdir -p {HOME_DIR}/.vim/colors")
-    run(
-        f"ln -s {HOME_DIR}/Desktop/work/pmcm/media/code/wombat256mod.vim {HOME_DIR}/.vim/colors/wombat256mod.vim"
-    )
 
 
 def setup_byobu():
@@ -140,7 +132,6 @@ def main():
     if proceed == "y":
         apt_install()
         add_home_configs()
-        setup_vim()
         setup_byobu()
         setup_vcprompt()
         setup_etc_hosts()
