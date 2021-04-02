@@ -32,10 +32,16 @@ def backup(local):
     for disk in ["Kingston", "hp"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             disk_found = True
-            rsync(local, "~/Documents", '"/media/%s/%s/Documents"' % (current_userid, disk))
-            rsync(local, "~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk))
-            rsync(local,
-                '"/media/%s/%s/work"' % (current_userid, disk), "~/Desktop/work"
+            rsync(
+                local,
+                "~/Documents",
+                '"/media/%s/%s/Documents"' % (current_userid, disk),
+            )
+            rsync(
+                local, "~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk)
+            )
+            rsync(
+                local, '"/media/%s/%s/work"' % (current_userid, disk), "~/Desktop/work"
             )  # Copy changes from disk
             break
     if not disk_found:
@@ -53,9 +59,13 @@ def backup(local):
 @task
 def full_backup(local):
     """Backup of more directories to USB drive."""
-    rsync("~/Desktop/work", "/media/ahernp/Iomega\ HDD/archive/work/affectv")
+    rsync(local, "~/Desktop/work", "/media/ahernp/Iomega\ HDD/archive/work/affectv")
     for directory in ["Documents", "ebooks", "Music", "Pictures"]:
-        rsync(local, "~/%s" % directory, "/media/ahernp/Iomega\ HDD/archive/%s" % directory)
+        rsync(
+            local,
+            "~/%s" % directory,
+            "/media/ahernp/Iomega\ HDD/archive/%s" % directory,
+        )
 
 
 @task

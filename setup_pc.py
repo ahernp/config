@@ -118,7 +118,7 @@ def enable_firewall():
 
 def pip_install():
     print("Install pip packages:")
-    run("pip3 install decorator Glances httpie ipython Markdown rich")
+    run("pip3 install decorator Glances httpie ipython Markdown pre-commit rich")
 
 
 def remove_home_from_desktop():
