@@ -49,6 +49,7 @@ def apt_install():
         "htop",
         "hunspell-en-gb",
         "python3-pip",
+        "python3-venv",
         "rename",
         "screen",
         "silversearcher-ag",
