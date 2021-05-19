@@ -50,6 +50,7 @@ def apt_install():
         "htop",
         "hunspell-en-gb",
         "inkscape",
+        "locate",
         "python3-pip",
         "python3-venv",
         "rename",
