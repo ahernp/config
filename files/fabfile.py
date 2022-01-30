@@ -91,9 +91,14 @@ def numbers_of_days(local):
     now = datetime.now()
     print(f'Today is {now.strftime("%a, %d %b %Y")}:')
     for target, label in [
-        ("2020-02-01", "since Brexit"),
-        (f"{now.year}-12-25", "to Christmas"),
+        ("2020-02-01", "Brexit"),
+        (f"{now.year}-12-25", "Christmas"),
     ]:
         target_date = datetime.strptime(target, "%Y-%m-%d")
-        number_of_days = abs((now - target_date).days)
-        print(f"    {number_of_days:,} days {label}")
+        if target_date < now:
+            number_of_days = (now - target_date).days
+            label_prefix = "since"
+        else:
+            number_of_days = (target_date - now).days
+            label_prefix = "to"
+        print(f"    {number_of_days:,} days {label_prefix} {label}")
