@@ -7,7 +7,7 @@ setopt prompt_subst
 autoload -U colors && colors
 RPROMPT='${PWD/#$HOME/~} (%n@%m)'
 # vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
-PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt)%{$reset_color%} '
+PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m%a%u')%{$reset_color%} '
 
 export EDITOR="vi"
 alias ls='ls -Fh --color=auto'

@@ -19,7 +19,7 @@ services:
         volumes:
             - .:/work
         ports:
-            - "8000:8000"
+            - "8001:8001"
     nginx:
         image: nginx:stable
         volumes:
