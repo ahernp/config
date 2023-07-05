@@ -18,6 +18,7 @@ highlight RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$/
 
 set hlsearch
+set showmatch
 
 set tabstop=4
 set softtabstop=4
@@ -27,6 +28,8 @@ set expandtab
 set autoindent
 
 set laststatus=2
+
+set tabpagemax=99
 
 " last-position-jump
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
