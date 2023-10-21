@@ -11,7 +11,7 @@ current_userid = getpass.getuser()
 def rsync(context, source, dest):
     """Copy files from source to destination.."""
     source += "/"
-    command = "rsync -auv --exclude '*.pyc' --stats --modify-window=1 %s %s" % (
+    command = "rsync -auv --exclude '*.pyc' --stats --modify-window=1 %s %s | grep 'files transferred'" % (
         source,
         dest,
     )
