@@ -12,7 +12,7 @@ PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m
 export EDITOR="vi"
 alias ls='ls -Fh --color=auto'
 alias backup='cd ~;fab backup;cd -'
-alias vi='vi -p'
+alias pmcm='cd ~/code/pmcm;source venv/bin/activate;python server.py'
 
 alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'

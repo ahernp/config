@@ -37,29 +37,19 @@ def apt_install():
     APT_PACKAGES = [
         "byobu",
         "calibre",
-        "curl",
-        "docker.io",
-        "docker-compose",
         "fabric",
         "geany",
         "geany-plugins",
-        "gimp",
         "git",
         "gnucash",
-        "gnome-tweak-tool",
+        "gnome-tweaks",
         "htop",
-        "hunspell-en-gb",
         "inkscape",
-        "locate",
-        "python3-pip",
+        "pipx",
         "python3-venv",
-        "rename",
-        "screen",
         "silversearcher-ag",
         "speedcrunch",
-        "ssh",
         "tree",
-        "vim",
         "vlc",
         "zsh",
     ]
@@ -68,7 +58,7 @@ def apt_install():
 
 def add_home_configs():
     print("Add configuration files to home directory:")
-    for filename in [".gitconfig", ".vimrc", ".vim", ".zshrc", "fabfile.py"]:
+    for filename in [".gitconfig", ".zshrc", "fabfile.py"]:
         link_path = f"{HOME_DIR}/{filename}"
         run(f"rm {link_path}")
         run(f"ln -s {CURR_DIR}/files/{filename} {link_path}")
@@ -77,8 +67,7 @@ def add_home_configs():
 
 
 def setup_byobu():
-    print("Setup byobu")
-    run("byobu-select-backend screen")
+    print("Setup byobu:")
     run(
         f"cp {CURR_DIR}/files/byobu.desktop {HOME_DIR}/.local/share/applications/byobu.desktop"
     )
@@ -104,25 +93,14 @@ def change_shell_to_zsh():
     run("sudo mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting")
 
 
-def setup_devenv():
-    print("Setup development environment:")
-    run(
-        f"ln -s {CURR_DIR}/files/devenv/docker-compose.yml {PARENT_DIR}/docker-compose.yml"
-    )
-    run(f"ln -s {CURR_DIR}/files/devenv/.pylintrc {PARENT_DIR}/.pylintrc")
-    run(f"ln -s {CURR_DIR}/files/devenv/setup.cfg {PARENT_DIR}/setup.cfg")
-    run(f"ln -s {CURR_DIR}/files/devenv {PARENT_DIR}/devenv")
-    run(f"ln -s {CURR_DIR}/files/devenv/setup_app.py {PARENT_DIR}/setup_app.py")
-
-
 def enable_firewall():
     print("Enable Firewall:")
     run("sudo ufw enable")
 
 
-def pip_install():
+def pipx_install():
     print("Install pip packages:")
-    run("pip3 install decorator Glances httpie ipython Markdown pre-commit rich")
+    run("pipx install Markdown pre-commit")
 
 
 def remove_home_from_desktop():
@@ -140,7 +118,6 @@ def main():
         setup_vcprompt()
         setup_etc_hosts()
         change_shell_to_zsh()
-        setup_devenv()
         enable_firewall()
         pip_install()
         remove_home_from_desktop()
