@@ -29,7 +29,7 @@ def backup(local):
     )  # delete old accounts files
 
     disk_found = False
-    for disk in ["Kingston", "hp"]:
+    for disk in ["Kingston", "HP"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             disk_found = True
             rsync(
@@ -101,4 +101,4 @@ def numbers_of_days(local):
         else:
             number_of_days = (target_date - now).days
             label_prefix = "to"
-        print(f"    {number_of_days:,} days {label_prefix} {label}")
+        print(f"{number_of_days:>8,} days {label_prefix} {label}")
