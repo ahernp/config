@@ -11,9 +11,12 @@ current_userid = getpass.getuser()
 def rsync(context, source, dest):
     """Copy files from source to destination.."""
     source += "/"
-    command = "rsync -auv --exclude '*.pyc' --stats --modify-window=1 %s %s | grep 'files transferred'" % (
-        source,
-        dest,
+    command = (
+        "rsync -auv --exclude '*.pyc' --stats --modify-window=1 %s %s | grep 'files transferred'"
+        % (
+            source,
+            dest,
+        )
     )
     print("Running '%s'" % (command))
     context.run(command)
@@ -25,7 +28,7 @@ def backup(local):
     rsync(local, "~/code/pmcm/data", "~/Desktop/work/pmcm/data")
     rsync(local, "~/code/pmcm/media", "~/Desktop/work/pmcm/media")
     local.run(
-        "find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
+        r"find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
 
     disk_found = False
@@ -59,12 +62,12 @@ def backup(local):
 @task
 def full_backup(local):
     """Backup of more directories to USB drive."""
-    rsync(local, "~/Desktop/work", "/media/ahernp/Iomega\ HDD/archive/work/affectv")
+    rsync(local, "~/Desktop/work", r"/media/ahernp/Iomega\ HDD/archive/work/affectv")
     for directory in ["Documents", "ebooks", "Music", "Pictures"]:
         rsync(
             local,
             "~/%s" % directory,
-            "/media/ahernp/Iomega\ HDD/archive/%s" % directory,
+            r"/media/ahernp/Iomega\ HDD/archive/%s" % directory,
         )
 
 

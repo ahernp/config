@@ -35,6 +35,7 @@ def setup_dot_ssh():
 def apt_install():
     print("Install apt packages:")
     APT_PACKAGES = [
+        "black",
         "byobu",
         "calibre",
         "fabric",
@@ -42,14 +43,13 @@ def apt_install():
         "geany-plugins",
         "git",
         "gnucash",
-        "gnome-tweaks",
         "htop",
         "inkscape",
-        "pipx",
+        "python3-pip",
+        "python3-pylsp",
         "python3-venv",
         "ranger",
         "silversearcher-ag",
-        "speedcrunch",
         "tree",
         "vlc",
         "zsh",
