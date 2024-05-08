@@ -47,6 +47,7 @@ def apt_install():
         "inkscape",
         "pipx",
         "python3-venv",
+        "ranger",
         "silversearcher-ag",
         "speedcrunch",
         "tree",
