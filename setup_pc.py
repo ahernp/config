@@ -38,6 +38,7 @@ def apt_install():
         "black",
         "byobu",
         "calibre",
+        "curl",
         "fabric",
         "geany",
         "geany-plugins",
@@ -120,7 +121,6 @@ def main():
         setup_etc_hosts()
         change_shell_to_zsh()
         enable_firewall()
-        pip_install()
         remove_home_from_desktop()
 
 

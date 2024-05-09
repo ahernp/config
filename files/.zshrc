@@ -11,7 +11,6 @@ PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m
 
 alias ls='ls -Fh --color=auto'
 alias backup='cd ~;fab backup;cd -'
-alias pmcm='cd ~/code/pmcm;source venv/bin/activate;python server.py'
 alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'
 alias cal='ncal -byM'
