@@ -68,13 +68,6 @@ def add_home_configs():
     run(f"cp {CURR_DIR}/files/.zsh_history {HOME_DIR}/.zsh_history")
 
 
-def setup_byobu():
-    print("Setup byobu:")
-    run(
-        f"cp {CURR_DIR}/files/byobu.desktop {HOME_DIR}/.local/share/applications/byobu.desktop"
-    )
-
-
 def setup_vcprompt():
     print("Setup vcprompt:")
     run(f"sudo ln -s {CURR_DIR}/files/vcprompt /usr/local/bin/vcprompt")
@@ -100,28 +93,16 @@ def enable_firewall():
     run("sudo ufw enable")
 
 
-def pipx_install():
-    print("Install pip packages:")
-    run("pipx install Markdown pre-commit")
-
-
-def remove_home_from_desktop():
-    print("Remove home folder from Desktop:")
-    run("gsettings set org.gnome.shell.extensions.desktop-icons show-home false")
-
-
 def main():
     setup_dot_ssh()
     proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
     if proceed == "y":
         apt_install()
         add_home_configs()
-        setup_byobu()
         setup_vcprompt()
         setup_etc_hosts()
         change_shell_to_zsh()
         enable_firewall()
-        remove_home_from_desktop()
 
 
 if __name__ == "__main__":

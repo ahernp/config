@@ -14,6 +14,7 @@ alias backup='cd ~;fab backup;cd -'
 alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'
 alias cal='ncal -byM'
+alias pmcm='cd ~/code/pmcm;./startup.sh'
 
 grep "alias " ~/.zshrc
 
