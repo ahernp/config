@@ -35,16 +35,17 @@ def setup_dot_ssh():
 def apt_install():
     print("Install apt packages:")
     APT_PACKAGES = [
+        "bat",
         "black",
         "byobu",
         "calibre",
         "curl",
+        "exa",
         "fabric",
         "geany",
         "geany-plugins",
         "git",
         "gnucash",
-        "highlight",
         "htop",
         "inkscape",
         "locate",

@@ -9,7 +9,10 @@ RPROMPT='${PWD/#$HOME/~} (%n@%m)'
 # vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
 PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m%a%u')%{$reset_color%} '
 
-alias ls='ls -Fh --color=auto'
+alias ls='exa'
+alias ll='exa -alh'
+alias tree='exa --tree'
+alias cat='batcat'
 alias backup='cd ~;fab backup;cd -'
 alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'
@@ -38,5 +41,9 @@ stty -ixon
 
 # Activate zshrc syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Set up fzf key bindings and fuzzy completion
+# Needs version 0.48 or later
+source <(fzf --zsh)
 
 fab numbers-of-days
