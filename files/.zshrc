@@ -9,8 +9,8 @@ RPROMPT='${PWD/#$HOME/~} (%n@%m)'
 # vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
 PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m%a%u')%{$reset_color%} '
 
-alias ls='exa'
-alias ll='exa -alh'
+alias ls='exa -F'
+alias ll='exa -Falh'
 alias tree='exa --tree'
 alias cat='batcat'
 alias backup='cd ~;fab backup;cd -'
@@ -18,8 +18,6 @@ alias tz='fab times'
 alias up='sudo apt update && sudo apt upgrade -y'
 alias cal='ncal -byM'
 alias pmcm='cd ~/code/pmcm;./startup.sh'
-
-grep "alias " ~/.zshrc
 
 # zsh history
 HISTFILE=~/.zsh_history
