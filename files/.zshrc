@@ -5,19 +5,22 @@ compinit -i
 # Prompts
 setopt prompt_subst
 autoload -U colors && colors
-RPROMPT='${PWD/#$HOME/~} (%n@%m)'
+RPROMPT="${PWD/#$HOME/~} (%n@%m)"
 # vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
 PROMPT='%{$fg_bold[green]%}%p%{$fg[cyan]%}%c%{$fg_bold[blue]%} $(vcprompt -f '%m%a%u')%{$reset_color%} '
 
-alias ls='exa -F'
-alias ll='exa -Falh'
-alias tree='exa --tree'
-alias cat='batcat'
-alias backup='cd ~;fab backup;cd -'
-alias tz='fab times'
-alias up='sudo apt update && sudo apt upgrade -y'
-alias cal='ncal -byM'
-alias pmcm='cd ~/code/pmcm;./startup.sh'
+alias ls="exa -F"
+alias ll="exa -Falh"
+alias tree="exa --tree"
+alias cat="batcat"
+alias backup="cd ~;fab backup;cd -"
+alias tz="fab times"
+alias up="sudo apt update && sudo apt upgrade -y"
+alias cal="ncal -byM"
+alias pmcm="cd ~/code/pmcm;./startup.sh"
+alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
+
+grep "^alias " ~/.zshrc
 
 # zsh history
 HISTFILE=~/.zsh_history
@@ -43,5 +46,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Set up fzf key bindings and fuzzy completion
 # Needs version 0.48 or later
 source <(fzf --zsh)
+
+# Enable history arrow search
+bindkey '^[OA' history-search-backward
+bindkey '^[OB' history-search-forward
 
 fab numbers-of-days
