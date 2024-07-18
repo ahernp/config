@@ -48,7 +48,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(fzf --zsh)
 
 # Enable history arrow search
-bindkey '^[OA' history-search-backward
-bindkey '^[OB' history-search-forward
+bindkey '^[OA' history-beginning-search-backward
+bindkey '^[OB' history-beginning-search-forward
 
 fab numbers-of-days
