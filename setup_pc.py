@@ -56,6 +56,7 @@ def apt_install():
         "ranger",
         "silversearcher-ag",
         "tree",
+        "ufw",
         "vlc",
         "zsh",
     ]
