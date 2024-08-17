@@ -61,12 +61,12 @@ def install_zsh_syntax_highlighting():
     run(
         "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /tmp/zsh-syntax-highlighting"
     )
-    run("sudo mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting")
+    run("mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting")
 
 
 def enable_firewall():
     print("Enable Firewall:")
-    run("sudo ufw enable")
+    run("ufw enable")
 
 
 def setup_dot_ssh():
