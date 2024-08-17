@@ -31,10 +31,10 @@ def backup(local):
         r"find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
     )  # delete old accounts files
 
-    disk_found = False
+    work_dir_found = False
     for disk in ["Kingston", "HP"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
-            disk_found = True
+            work_dir_found = True
             rsync(
                 local,
                 "~/Documents",
@@ -47,16 +47,13 @@ def backup(local):
                 local, '"/media/%s/%s/work"' % (current_userid, disk), "~/Desktop/work"
             )  # Copy changes from disk
             break
-    if not disk_found:
-        print("[blink yellow]Error no disk found for backup[/blink yellow]")
+    if not work_dir_found:
+        print("[blink yellow]Error work dir not found for backup[/blink yellow]")
         return
 
     # Restore permissions on private keys
     local.run("chmod o-rx,g-rx ~/.ssh/github/id_rsa")
     local.run("chmod o-rx,g-rx ~/.ssh/id_rsa")
-
-    rsync(local, "~/Desktop/work/pmcm/data", "~/code/pmcm/data")
-    rsync(local, "~/Desktop/work/pmcm/media", "~/code/pmcm/media")
 
 
 @task
@@ -104,4 +101,4 @@ def numbers_of_days(local):
         else:
             number_of_days = (target_date - now).days
             label_prefix = "to"
-        print(f"{number_of_days:>8,} days {label_prefix} {label}")
+        print(f"[magenta]{number_of_days:>8,} days {label_prefix} {label}")
