@@ -45,11 +45,6 @@ def apt_install():
     run(f"apt install {' '.join(APT_PACKAGES)}")
 
 
-def setup_vcprompt():
-    print("Setup vcprompt:")
-    run(f"ln -s {CURR_DIR}/files/vcprompt /usr/local/bin/vcprompt")
-
-
 def setup_etc_hosts():
     print("Setup /etc/hosts:")
     run(f"cp {CURR_DIR}/files/hosts /etc/hosts")
@@ -106,7 +101,6 @@ def main():
     is_root = os.geteuid() == 0
     if is_root:
         apt_install()
-        setup_vcprompt()
         setup_etc_hosts()
         install_zsh_syntax_highlighting()
         enable_firewall()
