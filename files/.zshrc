@@ -3,11 +3,26 @@ autoload -U compinit zcalc zmv
 compinit -i
 
 # Prompts
+# Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
+autoload -Uz add-zsh-hook vcs_info
+# Enable substitution in the prompt.
 setopt prompt_subst
-autoload -U colors && colors
+# Run vcs_info just before a prompt is displayed (precmd)
+add-zsh-hook precmd vcs_info
+# add ${vcs_info_msg_0} to the prompt
+# e.g. here we add the Git information in cyan
+PROMPT='%~ %F{cyan}${vcs_info_msg_0_}%f'
+
+# Enable checking for (un)staged changes, enabling use of %u and %c
+zstyle ':vcs_info:*' check-for-changes true
+# Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
+zstyle ':vcs_info:*' unstagedstr ' *'
+zstyle ':vcs_info:*' stagedstr ' +'
+# Set the format of the Git information for vcs_info
+zstyle ':vcs_info:git:*' formats       '(%b%u%c) '
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c) '
+
 RPROMPT="(%n@%m)"
-# vcprompt must be installed for this to work (see https://github.com/djl/vcprompt)
-PROMPT='%{$fg_bold[cyan]%}%~%{$fg[cyan]%}$(vcprompt -f '%m%a%u')%{$reset_color%} '
 
 alias ls="exa -F"
 alias ll="exa -alhF"
