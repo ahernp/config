@@ -35,6 +35,7 @@ def apt_install():
         "python3-pip",
         "python3-pylsp",
         "python3-venv",
+        "qalculate-gtk",
         "ranger",
         "silversearcher-ag",
         "tree",
