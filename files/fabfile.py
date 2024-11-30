@@ -43,9 +43,6 @@ def backup(local):
             rsync(
                 local, "~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk)
             )
-            rsync(
-                local, '"/media/%s/%s/work"' % (current_userid, disk), "~/Desktop/work"
-            )  # Copy changes from disk
             break
     if not work_dir_found:
         print("[blink yellow]Error work dir not found for backup[/blink yellow]")

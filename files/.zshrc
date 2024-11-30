@@ -24,16 +24,17 @@ zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c) '
 
 RPROMPT="(%n@%m)"
 
-alias ls="exa -F"
-alias ll="exa -alhF"
-alias tree="exa --tree"
+alias ls="eza -F"
+alias ll="eza -alhF"
+alias tree="eza --tree"
 alias cat="batcat"
 alias backup="cd ~;fab backup;cd -"
 alias tz="fab times"
 alias up="sudo apt update && sudo apt upgrade -y"
 alias cal="ncal -byM"
-alias pmcm="cd ~/code/pmcm;./startup.sh"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
+alias dev="cd ~/code/ahernp.com;source venv/bin/activate"
+alias run="cd ~/code/ahernp.com;source venv/bin/activate;python manage.py runserver --settings project.dev_settings"
 
 grep "^alias " ~/.zshrc
 
@@ -66,4 +67,5 @@ source <(fzf --zsh)
 bindkey '^[OA' history-beginning-search-backward
 bindkey '^[OB' history-beginning-search-forward
 
+neofetch
 fab numbers-of-days

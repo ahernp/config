@@ -32,6 +32,7 @@ def apt_install():
         "inkscape",
         "locate",
         "ncal",
+        "neofetch",
         "python3-pip",
         "python3-pylsp",
         "python3-venv",

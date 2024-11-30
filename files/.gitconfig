@@ -19,3 +19,7 @@
 # Use ssh instead of https
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
