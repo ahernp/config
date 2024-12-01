@@ -22,7 +22,6 @@ def apt_install():
         "byobu",
         "calibre",
         "curl",
-        "exa",
         "fabric",
         "geany",
         "geany-plugins",
