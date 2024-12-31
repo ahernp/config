@@ -20,7 +20,6 @@ def apt_install():
         "bat",
         "black",
         "btop",
-        "byobu",
         "calibre",
         "curl",
         "epiphany-browser",
@@ -31,6 +30,7 @@ def apt_install():
         "gnucash",
         "htop",
         "inkscape",
+        "kitty",
         "locate",
         "ncal",
         "neofetch",
@@ -94,6 +94,12 @@ def add_home_configs():
         run(f"ln -s {CURR_DIR}/files/{filename} {link_path}")
     run(f"rm {HOME_DIR}/.zsh_history")
     run(f"cp {CURR_DIR}/files/.zsh_history {HOME_DIR}/.zsh_history")
+    run(f"mkdir -p {HOME_DIR}/.config/kitty")
+
+    run(
+        f"ln -s {CURR_DIR}/files/ahernp-kitty.conf {HOME_DIR}/.config/kitty/ahernp-kitty.conf"
+    )
+    run(f"echo include ahernp-kitty.conf >> {HOME_DIR}/.config/kitty/kitty.conf")
 
 
 def change_shell_to_zsh():

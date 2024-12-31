@@ -86,7 +86,7 @@ def times(local):
 def numbers_of_days(local):
     """Numbers of days since and to various dates"""
     now = datetime.now()
-    print(f'Today is {now.strftime("%a, %d %b %Y")}:')
+    print(f'[blue]Today is {now.strftime("%a, %d %b %Y")}:')
     for target, label in [
         ("2020-02-01", "Brexit"),
         (f"{now.year}-12-25", "Christmas"),
@@ -98,4 +98,4 @@ def numbers_of_days(local):
         else:
             number_of_days = (target_date - now).days
             label_prefix = "to"
-        print(f"[magenta]{number_of_days:>8,} days {label_prefix} {label}")
+        print(f"[green]{number_of_days:>8,} days {label_prefix} {label}")
