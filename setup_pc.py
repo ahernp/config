@@ -94,17 +94,23 @@ def add_home_configs():
         run(f"ln -s {CURR_DIR}/files/{filename} {link_path}")
     run(f"rm {HOME_DIR}/.zsh_history")
     run(f"cp {CURR_DIR}/files/.zsh_history {HOME_DIR}/.zsh_history")
-    run(f"mkdir -p {HOME_DIR}/.config/kitty")
 
+
+def add_kitty_config():
+    print("Add configuration files for kitty:")
+    run(f"mkdir -p {HOME_DIR}/.config/kitty")
+    run(f"ln -s {CURR_DIR}/files/kitty/kitty.conf {HOME_DIR}/.config/kitty/kitty.conf")
     run(
-        f"ln -s {CURR_DIR}/files/ahernp-kitty.conf {HOME_DIR}/.config/kitty/ahernp-kitty.conf"
+        f"ln -s {CURR_DIR}/files/kitty/ahernp-kitty.conf {HOME_DIR}/.config/kitty/ahernp-kitty.conf"
     )
-    run(f"echo include ahernp-kitty.conf >> {HOME_DIR}/.config/kitty/kitty.conf")
+    run(
+        f"ln -s {CURR_DIR}/files/kitty/current-theme.conf {HOME_DIR}/.config/kitty/current-theme.conf"
+    )
 
 
 def add_helix_config():
+    print("Add configuration files for helix:")
     run(f"mkdir -p {HOME_DIR}/.config/helix/themes")
-
     run(
         f"ln -s {CURR_DIR}/files/helix/config.toml {HOME_DIR}/.config/helix/config.toml"
     )
@@ -129,12 +135,13 @@ def main():
         install_zsh_syntax_highlighting()
         enable_firewall()
     else:
-        setup_dot_ssh()
-        add_helix_config()
-        proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
-        if proceed == "y":
-            add_home_configs()
-            change_shell_to_zsh()
+        # setup_dot_ssh()
+        # add_helix_config()
+        add_kitty_config()
+        # proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
+        # if proceed == "y":
+        #     add_home_configs()
+        #     change_shell_to_zsh()
 
 
 if __name__ == "__main__":
