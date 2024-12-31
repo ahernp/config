@@ -102,6 +102,20 @@ def add_home_configs():
     run(f"echo include ahernp-kitty.conf >> {HOME_DIR}/.config/kitty/kitty.conf")
 
 
+def add_helix_config():
+    run(f"mkdir -p {HOME_DIR}/.config/helix/themes")
+
+    run(
+        f"ln -s {CURR_DIR}/files/helix/config.toml {HOME_DIR}/.config/helix/config.toml"
+    )
+    run(
+        f"ln -s {CURR_DIR}/files/helix/languages.toml {HOME_DIR}/.config/helix/languages.toml"
+    )
+    run(
+        f"ln -s {CURR_DIR}/files/helix/themes/ahernp.toml {HOME_DIR}/.config/helix/themes/ahernp.toml"
+    )
+
+
 def change_shell_to_zsh():
     print("Change shell to zsh:")
     run("chsh -s /usr/bin/zsh")
@@ -116,6 +130,7 @@ def main():
         enable_firewall()
     else:
         setup_dot_ssh()
+        add_helix_config()
         proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
         if proceed == "y":
             add_home_configs()

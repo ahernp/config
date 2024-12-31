@@ -1,0 +1,26 @@
+theme = "ahernp"
+
+[editor]
+line-number = "relative"
+mouse = false
+bufferline = "always"
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.soft-wrap]
+enable = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name", "file-modification-indicator"]
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+[keys.normal."space"]
+"<" = "file_picker_in_current_buffer_directory"
+
+[keys.select]
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"

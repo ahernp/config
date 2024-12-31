@@ -1,0 +1,21 @@
+[[language]]
+name = "python"
+roots = [".git"]
+auto-format = true
+formatter = {command = "black", args = ["--quiet", "-"]}
+
+[language-server.pylsp]
+config = {pylsp={plugins={pycodestyle={enabled=false},flake8={enabled=true,maxLineLength=120},pyflakes={enabled=false}}}}
+
+[[language]]
+name = "html"
+auto-format = false
+indent = { tab-width = 4, unit = "  " }
+
+[[language]]
+name = "css"
+auto-format = false
+indent = { tab-width = 4, unit = "  " }
+
+[[language]]
+name = "javascript"
