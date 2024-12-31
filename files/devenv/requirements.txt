@@ -1,6 +1,0 @@
-black
-Django
-feedparser
-flake8
-Markdown
-psycopg2-binary
