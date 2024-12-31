@@ -135,13 +135,13 @@ def main():
         install_zsh_syntax_highlighting()
         enable_firewall()
     else:
-        # setup_dot_ssh()
-        # add_helix_config()
+        setup_dot_ssh()
+        add_helix_config()
         add_kitty_config()
-        # proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
-        # if proceed == "y":
-        #     add_home_configs()
-        #     change_shell_to_zsh()
+        proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
+        if proceed == "y":
+            add_home_configs()
+            change_shell_to_zsh()
 
 
 if __name__ == "__main__":
