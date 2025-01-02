@@ -26,7 +26,7 @@ RPROMPT="(%n@%m)"
 
 alias ls="eza -F"
 alias ll="eza -alhF"
-alias tree="eza --tree"
+alias tree="eza --tree --long -a --git-ignore"
 alias cat="batcat"
 alias backup="cd ~;fab backup;cd -"
 alias tz="fab times"
@@ -68,4 +68,4 @@ bindkey '^[OA' history-beginning-search-backward
 bindkey '^[OB' history-beginning-search-forward
 
 neofetch
-fab numbers-of-days
+uptime
