@@ -99,27 +99,29 @@ def add_home_configs():
 def add_kitty_config():
     print("Add configuration files for kitty:")
     run(f"mkdir -p {HOME_DIR}/.config/kitty")
-    run(f"ln -s {CURR_DIR}/files/kitty/kitty.conf {HOME_DIR}/.config/kitty/kitty.conf")
-    run(
-        f"ln -s {CURR_DIR}/files/kitty/ahernp-kitty.conf {HOME_DIR}/.config/kitty/ahernp-kitty.conf"
-    )
-    run(
-        f"ln -s {CURR_DIR}/files/kitty/current-theme.conf {HOME_DIR}/.config/kitty/current-theme.conf"
-    )
+    for filename in ["kitty", "ahernp-kitty", "current-theme", "ahernp-session"]:
+        run(
+            f"ln -s {CURR_DIR}/files/kitty/{filename}.conf {HOME_DIR}/.config/kitty/{filename}.conf"
+        )
 
 
 def add_helix_config():
     print("Add configuration files for helix:")
     run(f"mkdir -p {HOME_DIR}/.config/helix/themes")
-    run(
-        f"ln -s {CURR_DIR}/files/helix/config.toml {HOME_DIR}/.config/helix/config.toml"
-    )
-    run(
-        f"ln -s {CURR_DIR}/files/helix/languages.toml {HOME_DIR}/.config/helix/languages.toml"
-    )
-    run(
-        f"ln -s {CURR_DIR}/files/helix/themes/ahernp.toml {HOME_DIR}/.config/helix/themes/ahernp.toml"
-    )
+    for filename in ["config", "languages", "themes/ahernp"]:
+        run(
+            f"ln -s {CURR_DIR}/files/helix/{filename}.toml {HOME_DIR}/.config/helix/{filename}.toml"
+        )
+
+
+def install_rust():
+    print("Install rust cargo and packages:")
+    run("curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh")
+    run("cargo install --git https://github.com/XAMPPRocky/tokei.git tokei")
+    run("cargo install ripgrep")
+    run("cargo install repgrep")
+    run("cargo install --locked serie")
+    run("cargo install --locked yazi-fm yazi-cli")
 
 
 def change_shell_to_zsh():
@@ -138,6 +140,7 @@ def main():
         setup_dot_ssh()
         add_helix_config()
         add_kitty_config()
+        install_rust()
         proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
         if proceed == "y":
             add_home_configs()
