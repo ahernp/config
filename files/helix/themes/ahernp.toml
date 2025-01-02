@@ -2,5 +2,3 @@ inherits = "nord"
 
 "ui.statusline.insert" = { fg = "white", bg = "#FF0000" }
 "ui.bufferline.active" = { fg = "white", bg = "#008800" }
-"ui.background" = { bg = "#24272B" }
-"ui.selection.primary" = { fg = "white", bg = "#880000" }
