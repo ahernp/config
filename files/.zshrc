@@ -19,10 +19,14 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
 # Set the format of the Git information for vcs_info
-zstyle ':vcs_info:git:*' formats       '(%b%u%c) '
-zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c) '
+zstyle ':vcs_info:git:*' formats       '%b%u%c '
+zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c '
 
-RPROMPT="(%n@%m)"
+# Function to get current CPU load averages
+load_average() {
+uptime | awk -F "load average: " '{print $2}'
+}
+RPROMPT='LA: $(load_average)'
 
 alias ls="eza -F"
 alias ll="eza -alhF"
@@ -68,4 +72,3 @@ bindkey '^[OA' history-beginning-search-backward
 bindkey '^[OB' history-beginning-search-forward
 
 neofetch
-uptime
