@@ -108,7 +108,7 @@ def add_kitty_config():
 def add_helix_config():
     print("Add configuration files for helix:")
     run(f"mkdir -p {HOME_DIR}/.config/helix/themes")
-    for filename in ["config", "languages", "themes/ahernp"]:
+    for filename in ["config", "languages", "themes/nord", "themes/ahernp"]:
         run(
             f"ln -s {CURR_DIR}/files/helix/{filename}.toml {HOME_DIR}/.config/helix/{filename}.toml"
         )
