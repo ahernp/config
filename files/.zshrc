@@ -22,12 +22,6 @@ zstyle ':vcs_info:*' stagedstr ' +'
 zstyle ':vcs_info:git:*' formats       '%b%u%c '
 zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c '
 
-# Function to get current CPU load averages
-load_average() {
-uptime | awk -F "load average: " '{print $2}'
-}
-RPROMPT='LA: $(load_average)'
-
 alias ls="eza -F"
 alias ll="eza -alhF"
 alias tree="eza --tree --long -a --git-ignore"
