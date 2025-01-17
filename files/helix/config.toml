@@ -6,9 +6,14 @@ mouse = false
 bufferline = "always"
 color-modes = true
 rulers = [88]
+end-of-line-diagnostics = "hint"
 
 [editor.cursor-shape]
 insert = "bar"
+
+[editor.inline-diagnostics]
+# Minimum severity to show a diagnostic on the primary cursor's line.
+cursor-line = "error"
 
 [editor.soft-wrap]
 enable = true
