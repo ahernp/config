@@ -39,6 +39,7 @@ def apt_install():
         "python3-venv",
         "qalculate-gtk",
         "ranger",
+        "rsync",
         "silversearcher-ag",
         "tldr",
         "tree",
@@ -114,16 +115,6 @@ def add_helix_config():
         )
 
 
-def install_rust():
-    print("Install rust cargo and packages:")
-    run("curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh")
-    run("cargo install --git https://github.com/XAMPPRocky/tokei.git tokei")
-    run("cargo install ripgrep")
-    run("cargo install repgrep")
-    run("cargo install --locked serie")
-    run("cargo install --locked yazi-fm yazi-cli")
-
-
 def change_shell_to_zsh():
     print("Change shell to zsh:")
     run("chsh -s /usr/bin/zsh")
@@ -140,7 +131,6 @@ def main():
         setup_dot_ssh()
         add_helix_config()
         add_kitty_config()
-        install_rust()
         proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
         if proceed == "y":
             add_home_configs()
