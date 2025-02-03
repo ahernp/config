@@ -38,7 +38,6 @@ def apt_install():
         "python3-pylsp",
         "python3-venv",
         "qalculate-gtk",
-        "ranger",
         "rsync",
         "silversearcher-ag",
         "tldr",
