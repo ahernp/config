@@ -43,6 +43,7 @@ def apt_install():
         "tldr",
         "tree",
         "ufw",
+        "vim",
         "vlc",
         "zsh",
     ]
