@@ -33,6 +33,7 @@ def apt_install():
         "kitty",
         "locate",
         "ncal",
+        "ncdu",
         "neofetch",
         "python3-pip",
         "python3-pylsp",
