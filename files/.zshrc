@@ -31,8 +31,9 @@ alias tz="fab times"
 alias up="sudo apt update && sudo apt upgrade -y"
 alias cal="ncal -byM"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
-alias dev="cd ~/code/ahernp.com;source venv/bin/activate"
-alias run="cd ~/code/ahernp.com;source venv/bin/activate;python manage.py runserver --settings project.dev_settings"
+alias dev="cd ~/code/pmcm;source venv/bin/activate"
+alias run="cd ~/code/pmcm;source venv/bin/activate;python manage.py server --port 7714"
+alias y="yazi"
 
 grep "^alias " ~/.zshrc
 
