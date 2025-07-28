@@ -25,10 +25,14 @@
 [column]
 	ui = auto
 
+# Better diff formatting with delta:
+[include]
+    path = /home/ahernp/code/delta/themes.gitconfig
 [interactive]
     diffFilter = delta --color-only
 [delta]
+    features = weeping-willow
     navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+    side-by-side = true
 [merge]
     conflictstyle = zdiff3
