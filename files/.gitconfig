@@ -1,6 +1,6 @@
 [user]
-	name = Paul Ahern
-	email = ahernp@ahernp.com
+    name = Paul Ahern
+    email = ahernp@ahernp.com
 [merge]
     tool = vimdiff
 [core]
@@ -19,11 +19,11 @@
 
 # Use ssh instead of https
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
 [branch]
-	sort = -committerdate
+    sort = -committerdate
 [column]
-	ui = auto
+    ui = auto
 
 # Better diff formatting with delta:
 [include]
