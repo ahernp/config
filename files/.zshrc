@@ -25,7 +25,7 @@ zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c '
 alias ls="eza -F"
 alias ll="eza -alhF"
 alias tree="eza --tree --long -a --git-ignore"
-alias cat="batcat"
+alias cat="batcat --theme=Nord"
 alias backup="cd ~;fab backup;cd -"
 alias tz="fab times"
 alias up="sudo apt update && sudo apt upgrade -y"
