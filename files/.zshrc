@@ -28,11 +28,10 @@ alias tree="eza --tree --long -a --git-ignore"
 alias cat="batcat --theme=Nord"
 alias backup="cd ~;fab backup;cd -"
 alias tz="fab times"
-alias up="sudo apt update && sudo apt upgrade -y"
 alias cal="ncal -byM"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
 alias dev="cd ~/code/pmcm;source venv/bin/activate"
-alias run="cd ~/code/pmcm;source venv/bin/activate;python manage.py server --port 7714"
+alias run="cd ~/code/pmcm;source venv/bin/activate;python server.py --port 7714"
 alias y="yazi"
 
 grep "^alias " ~/.zshrc
