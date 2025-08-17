@@ -27,7 +27,6 @@ alias ll="eza -alhF"
 alias tree="eza --tree --long -a --git-ignore"
 alias cat="batcat --theme=Nord"
 alias backup="cd ~;fab backup;cd -"
-alias tz="fab times"
 alias cal="ncal -byM"
 alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:500 {}"'
 alias dev="cd ~/code/pmcm;source venv/bin/activate"

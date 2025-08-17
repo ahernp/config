@@ -48,6 +48,7 @@ def apt_install():
         "ufw",
         "vim",
         "vlc",
+        "zip",
         "zsh",
     ]
     run(f"apt install {' '.join(APT_PACKAGES)}")

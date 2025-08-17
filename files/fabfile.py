@@ -1,5 +1,4 @@
 from datetime import datetime
-from pytz import timezone
 import getpass
 import os
 from fabric import task
@@ -63,23 +62,6 @@ def full_backup(local):
             "~/%s" % directory,
             r"/media/ahernp/Iomega\ HDD/archive/%s" % directory,
         )
-
-
-@task
-def times(local):
-    """Show current time in various timezones"""
-    TIMEZONES = [
-        "America/Los_Angeles",
-        "America/New_York",
-        "Europe/London",
-        "Asia/Singapore",
-        "Australia/Sydney",
-    ]
-
-    for tz_str in TIMEZONES:
-        tz = timezone(tz_str)
-        time = datetime.now(tz)
-        print("%s (%s)" % (time.strftime("%Y-%m-%d %H:%M:%S"), tz_str))
 
 
 @task

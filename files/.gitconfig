@@ -27,7 +27,7 @@
 
 # Better diff formatting with delta:
 [include]
-    path = /home/ahernp/code/delta/themes.gitconfig
+    path = /home/ahernp/.local/delta/themes.gitconfig
 [interactive]
     diffFilter = delta --color-only
 [delta]
