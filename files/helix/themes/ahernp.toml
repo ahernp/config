@@ -2,3 +2,8 @@ inherits = "nord"
 
 "ui.statusline.insert" = { fg = "white", bg = "#FF0000" }
 "ui.bufferline.active" = { fg = "white", bg = "#008800" }
+
+"ui.cursor.match" = { bg = "#ff0000" } # Matching bracket
+"ui.menu.selected" = { bg = "#008800" } # Current popup line
+"ui.text.focus" = { bg = "#008800" } # Current menu line
+"ui.highlight" = { bg = "#008800" } # Matching references
