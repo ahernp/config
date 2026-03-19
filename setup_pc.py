@@ -119,6 +119,11 @@ def add_helix_config():
         )
 
 
+def add_vim_config():
+    print("Add configuration file for vim:")
+    run(f"ln -s {CURR_DIR}/files/.vimrc {HOME_DIR}/.vimrc")
+
+
 def change_shell_to_zsh():
     print("Change shell to zsh:")
     run("chsh -s /usr/bin/zsh")
@@ -135,6 +140,7 @@ def main():
         setup_dot_ssh()
         add_helix_config()
         add_kitty_config()
+        add_vim_config()
         proceed = input("Check ~/.ssh has been set up. Proceed (y/n): ")
         if proceed == "y":
             add_home_configs()
