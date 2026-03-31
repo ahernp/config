@@ -25,6 +25,8 @@ def rsync(context, source, dest):
 def backup(local):
     """Simple backup of local directories to USB drive."""
     rsync(local, "~/code/pmcm/data", "~/Desktop/work/pmcm/data")
+    local.run("cp ~/.zshrc ~/code/pmcm/media/code")
+    local.run("cp ~/.zsh_history ~/code/pmcm/media/code")
     rsync(local, "~/code/pmcm/media", "~/Desktop/work/pmcm/media")
     local.run(
         r"find ~/Documents/accounts -type f -mtime +3 -exec rm {} \;"
