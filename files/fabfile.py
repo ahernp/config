@@ -33,7 +33,7 @@ def backup(local):
     )  # delete old accounts files
 
     work_dir_found = False
-    for disk in ["Kingston", "HP"]:
+    for disk in ["Kingston", "SANDISK", "External HD"]:
         if os.path.exists("/media/%s/%s/work" % (current_userid, disk)):
             work_dir_found = True
             rsync(
