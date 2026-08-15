@@ -44,6 +44,11 @@ def backup(local):
             rsync(
                 local, "~/Desktop/work", '"/media/%s/%s/work"' % (current_userid, disk)
             )
+            rsync(
+                local,
+                "~/.password-store",
+                '"/media/%s/%s/password-store"' % (current_userid, disk),
+            )
             break
     if not work_dir_found:
         print("[blink yellow]Error work dir not found for backup[/blink yellow]")
