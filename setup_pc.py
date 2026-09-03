@@ -91,6 +91,13 @@ def setup_dot_ssh():
         run(f"chmod g-rx,o-rx {HOME_DIR}/.ssh/id_rsa")
 
 
+def add_fastfetch_config():
+    print("Add configuration file for fastfetch:")
+    run(
+        f"ln -s {CURR_DIR}/files/fastfetch/config.jsonc {HOME_DIR}/.local/fastfetch/config.jsonc"
+    )
+
+
 def add_home_configs():
     print("Add configuration files to home directory:")
     for filename in [".gitconfig", ".zshrc", "fabfile.py"]:
@@ -138,6 +145,7 @@ def main():
         enable_firewall()
     else:
         setup_dot_ssh()
+        add_fastfetch_config()
         add_helix_config()
         add_kitty_config()
         add_vim_config()

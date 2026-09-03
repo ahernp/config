@@ -1,6 +1,7 @@
-from datetime import datetime
 import getpass
 import os
+from datetime import datetime
+
 from fabric import task
 from rich import print
 
