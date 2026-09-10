@@ -31,6 +31,7 @@ def apt_install():
         "git",
         "git-delta",
         "gnucash",
+        "gping",
         "htop",
         "inkscape",
         "kitty",
