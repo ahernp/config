@@ -32,6 +32,7 @@ alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:50
 alias dev="cd ~/code/pmcm;source venv/bin/activate"
 alias run="cd ~/code/pmcm;source venv/bin/activate;python server.py --port 7714"
 alias y="yazi"
+alias genpass="tr -dc 'A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_{|}~' </dev/urandom | head -c 30 ; echo"
 
 grep "^alias " ~/.zshrc
 
