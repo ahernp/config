@@ -22,8 +22,8 @@ zstyle ':vcs_info:*' stagedstr ' +'
 zstyle ':vcs_info:git:*' formats       '%b%u%c '
 zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c '
 
-alias ls="eza -F"
-alias ll="eza -alhF"
+alias ls="eza -F auto"
+alias ll="eza -alhF auto"
 alias tree="eza --tree --long -a --git-ignore"
 alias cat="batcat --theme=Nord"
 alias backup="cd ~;fab backup;cd -"
