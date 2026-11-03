@@ -69,11 +69,6 @@ def install_zsh_syntax_highlighting():
     run("mv /tmp/zsh-syntax-highlighting /usr/local/share/zsh-syntax-highlighting")
 
 
-def enable_firewall():
-    print("Enable Firewall:")
-    run("ufw enable")
-
-
 def setup_dot_ssh():
     print("Setup .ssh:")
     home_dot_ssh = f"{HOME_DIR}/.ssh"
@@ -143,7 +138,6 @@ def main():
         apt_install()
         setup_etc_hosts()
         install_zsh_syntax_highlighting()
-        enable_firewall()
     else:
         setup_dot_ssh()
         add_fastfetch_config()

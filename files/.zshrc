@@ -64,5 +64,3 @@ source <(fzf --zsh)
 # Enable history arrow search
 bindkey '^[OA' history-beginning-search-backward
 bindkey '^[OB' history-beginning-search-forward
-
-. "$HOME/.local/bin/env"
